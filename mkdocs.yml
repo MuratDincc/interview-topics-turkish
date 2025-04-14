@@ -1,7 +1,7 @@
 site_name: .NET Backend Mülakat Rehberi
 site_description: .NET backend geliştiricileri için kapsamlı mülakat rehberi
 site_author: Murat Dinc
-repo_url: https://github.com/muratdinc/interview-topics-turkish
+repo_url: https://github.com/MuratDincc/interview-topics-turkish
 edit_uri: edit/main/docs/
 
 theme:
