@@ -1,0 +1,36 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  markdown-link-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: gaurav-nelson/github-action-markdown-link-check@v1
+    
+  build:
+    name: Deploy docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Collect entries and sections
+        run: |
+          echo "entries=$(grep -ioR '^## ' * | wc -l)" >> $GITHUB_ENV
+
+      - name: Replace Tokens in index.md
+        uses: cschleiden/replace-tokens@master
+        with:
+          files: 'docs/index.md'
+        env:
+          entries: "${{ env.entries }}"
+
+      - name: Deploy MkDocs
+        uses: mhausenblas/mkdocs-deploy-gh-pages@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
