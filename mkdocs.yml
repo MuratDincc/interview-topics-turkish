@@ -1,0 +1,253 @@
+site_name: .NET Backend Mülakat Rehberi
+site_description: .NET backend geliştiricileri için kapsamlı mülakat rehberi
+site_author: Murat Dinc
+repo_url: https://github.com/muratdinc/interview-topics-turkish
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - search.share
+    - toc.integrate
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+    - content.action.edit
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Ana Sayfa: index.md
+  - Junior Developer:
+    - Temel .NET Kavramları:
+      - Genel Bakış: junior/basic-dotnet-concepts/index.md
+      - .NET Framework vs .NET Core: junior/basic-dotnet-concepts/framework-vs-core.md
+      - CLR: junior/basic-dotnet-concepts/clr.md
+      - Managed ve Unmanaged Code: junior/basic-dotnet-concepts/managed-unmanaged.md
+      - Assembly ve Namespace: junior/basic-dotnet-concepts/assembly-namespace.md
+      - Garbage Collection: junior/basic-dotnet-concepts/garbage-collection.md
+    - Algoritmalar:
+      - Genel Bakış: junior/algorithms/index.md
+      - Array Algorithms: junior/algorithms/array-algorithms.md
+      - String Algorithms: junior/algorithms/string-algorithms.md
+      - Number Algorithms: junior/algorithms/number-algorithms.md
+      - Dynamic Programming: junior/algorithms/dynamic-programming.md
+      - Sorting Algorithms: junior/algorithms/sorting-algorithms.md
+      - Linked List Algorithms: junior/algorithms/linked-list-algorithms.md
+      - Tree Algorithms: junior/algorithms/tree-algorithms.md
+      - Hash Table Algorithms: junior/algorithms/hash-table-algorithms.md
+    - C# Temelleri:
+      - Genel Bakış: junior/csharp-basics/index.md
+      - Temel Veri Tipleri: junior/csharp-basics/basic-data-types.md
+      - Kontrol Yapıları: junior/csharp-basics/control-structures.md
+      - Nesne Yönelimli Programlama: junior/csharp-basics/oop.md
+      - Koleksiyonlar: junior/csharp-basics/collections.md
+      - Delegates ve Events: junior/csharp-basics/delegates-events.md
+      - Exception Handling: junior/csharp-basics/exception-handling.md
+      - String İşlemleri: junior/csharp-basics/string-operations.md
+      - DateTime İşlemleri: junior/csharp-basics/datetime-operations.md
+      - File ve Stream İşlemleri: junior/csharp-basics/file-stream-operations.md
+      - Threading Temelleri: junior/csharp-basics/threading-basics.md
+      - Asenkron Programlama: junior/csharp-basics/async-programming.md
+      - Extension Methods: junior/csharp-basics/extension-methods.md
+      - Generics: junior/csharp-basics/generics.md
+      - Lambda Expressions: junior/csharp-basics/lambda-expressions.md
+      - LINQ Temelleri: junior/csharp-basics/linq-basics.md
+      - Nullable Types: junior/csharp-basics/nullable-types.md
+      - Value Types vs Reference Types: junior/csharp-basics/value-reference-types.md
+      - Boxing ve Unboxing: junior/csharp-basics/boxing-unboxing.md
+      - Memory Management: junior/csharp-basics/memory-management.md
+    - ASP.NET Core Temelleri:
+      - Genel Bakış: junior/aspnet-core-basics/index.md
+      - Middleware: junior/aspnet-core-basics/middleware.md
+      - Dependency Injection: junior/aspnet-core-basics/dependency-injection.md
+      - Routing: junior/aspnet-core-basics/routing.md
+      - Model Binding: junior/aspnet-core-basics/model-binding.md
+      - Validation: junior/aspnet-core-basics/validation.md
+    - Veritabanı İşlemleri:
+      - Genel Bakış: junior/database-operations/index.md
+      - Entity Framework Core: junior/database-operations/entity-framework-core.md
+      - LINQ: junior/database-operations/linq.md
+      - Migrations: junior/database-operations/migrations.md
+      - Transactions: junior/database-operations/transactions.md
+      - Performance: junior/database-operations/performance.md
+    - API Geliştirme:
+      - Genel Bakış: junior/api-development/index.md
+      - REST API: junior/api-development/rest-api.md
+      - HTTP Methods: junior/api-development/http-methods.md
+      - Status Codes: junior/api-development/status-codes.md
+      - API Versioning: junior/api-development/api-versioning.md
+      - API Documentation: junior/api-development/api-documentation.md
+    - Güvenlik Temelleri:
+      - Genel Bakış: junior/security-basics/index.md
+      - Authentication: junior/security-basics/authentication.md
+      - Authorization: junior/security-basics/authorization.md
+      - HTTPS: junior/security-basics/https.md
+      - CORS: junior/security-basics/cors.md
+      - Input Validation: junior/security-basics/input-validation.md
+    - Mülakat Örnekleri:
+      - Mülakat Örneği 1: junior/interview-examples/interview-1.md
+      - Mülakat Örneği 2: junior/interview-examples/interview-2.md
+      - Mülakat Örneği 3: junior/interview-examples/interview-3.md
+      - Mülakat Örneği 4: junior/interview-examples/interview-4.md
+      - Mülakat Örneği 5: junior/interview-examples/interview-5.md
+  - Mid-Level Developer:
+    - İleri C# Konuları:
+      - Genel Bakış: mid-level/advanced-csharp/index.md
+      - Async/Await: mid-level/advanced-csharp/async-await.md
+      - LINQ Advanced: mid-level/advanced-csharp/linq-advanced.md
+      - Reflection: mid-level/advanced-csharp/reflection.md
+      - Attributes: mid-level/advanced-csharp/attributes.md
+      - Expression Trees: mid-level/advanced-csharp/expression-trees.md
+    - Entity Framework:
+      - Genel Bakış: mid-level/entity-framework/index.md
+      - Performance Optimization: mid-level/entity-framework/performance-optimization.md
+      - Advanced Querying: mid-level/entity-framework/advanced-querying.md
+      - Change Tracking: mid-level/entity-framework/change-tracking.md
+      - Bulk Operations: mid-level/entity-framework/bulk-operations.md
+      - Concurrency: mid-level/entity-framework/concurrency.md
+      - Raw SQL: mid-level/entity-framework/raw-sql.md
+      - Interceptors: mid-level/entity-framework/interceptors.md
+      - Value Objects: mid-level/entity-framework/value-objects.md
+      - Complex Types: mid-level/entity-framework/complex-types.md
+      - Shadow Properties: mid-level/entity-framework/shadow-properties.md
+      - Global Query Filters: mid-level/entity-framework/global-query-filters.md
+      - Database Functions: mid-level/entity-framework/database-functions.md
+      - Custom Migrations: mid-level/entity-framework/custom-migrations.md
+      - Multiple Databases: mid-level/entity-framework/multiple-databases.md
+      - Distributed Transactions: mid-level/entity-framework/distributed-transactions.md
+    - Caching Stratejileri:
+      - Genel Bakış: mid-level/caching/index.md
+      - In-Memory Caching: mid-level/caching/in-memory-caching.md
+      - Distributed Caching: mid-level/caching/distributed-caching.md
+      - Cache Invalidation: mid-level/caching/cache-invalidation.md
+      - Cache Patterns: mid-level/caching/cache-patterns.md
+      - Redis Kullanımı: mid-level/caching/redis.md
+    - Logging ve Monitoring:
+      - Genel Bakış: mid-level/logging-monitoring/index.md
+      - Serilog/ELK Stack: mid-level/logging-monitoring/serilog-elk.md
+      - Application Insights: mid-level/logging-monitoring/application-insights.md
+      - OpenTelemetry: mid-level/logging-monitoring/opentelemetry.md
+      - Log Aggregation: mid-level/logging-monitoring/log-aggregation.md
+      - Performance Monitoring: mid-level/logging-monitoring/performance-monitoring.md
+    - Asenkron İşlemler:
+      - Genel Bakış: mid-level/async-operations/index.md
+      - Background Jobs: mid-level/async-operations/background-jobs.md
+      - Hangfire: mid-level/async-operations/hangfire.md
+      - Quartz.NET: mid-level/async-operations/quartz.md
+      - Task Parallel Library: mid-level/async-operations/tpl.md
+      - Reactive Programming: mid-level/async-operations/reactive-programming.md
+    - Message Queue:
+      - Genel Bakış: mid-level/message-queue/index.md
+      - RabbitMQ: mid-level/message-queue/rabbitmq.md
+      - Apache Kafka: mid-level/message-queue/kafka.md
+    - Test:
+      - Genel Bakış: mid-level/testing/index.md
+      - Unit Testing: mid-level/testing/unit-testing.md
+      - Test Driven Development: mid-level/testing/tdd.md
+      - Mocking: mid-level/testing/mocking.md
+      - Integration Testing: mid-level/testing/integration-testing.md
+      - Test Coverage: mid-level/testing/test-coverage.md
+      - Testing Best Practices: mid-level/testing/testing-best-practices.md
+    - Design Patterns:
+      - Genel Bakış: mid-level/design-patterns/index.md
+      - Creational Patterns: mid-level/design-patterns/creational-patterns.md
+      - Structural Patterns: mid-level/design-patterns/structural-patterns.md
+      - Behavioral Patterns: mid-level/design-patterns/behavioral-patterns.md
+      - Repository Pattern: mid-level/design-patterns/repository-pattern.md
+      - Unit of Work: mid-level/design-patterns/unit-of-work.md
+    - SOLID Prensipleri:
+      - Genel Bakış: mid-level/solid-principles/index.md
+      - Single Responsibility: mid-level/solid-principles/single-responsibility.md
+      - Open/Closed: mid-level/solid-principles/open-closed.md
+      - Liskov Substitution: mid-level/solid-principles/liskov-substitution.md
+      - Interface Segregation: mid-level/solid-principles/interface-segregation.md
+      - Dependency Inversion: mid-level/solid-principles/dependency-inversion.md
+    - Clean Architecture:
+      - Genel Bakış: mid-level/clean-architecture/index.md
+      - Domain Layer: mid-level/clean-architecture/domain-layer.md
+      - Application Layer: mid-level/clean-architecture/application-layer.md
+      - Infrastructure Layer: mid-level/clean-architecture/infrastructure-layer.md
+      - Presentation Layer: mid-level/clean-architecture/presentation-layer.md
+      - Cross-Cutting Concerns: mid-level/clean-architecture/cross-cutting-concerns.md
+    - Microservices:
+      - Genel Bakış: mid-level/microservices/index.md
+      - Service Communication: mid-level/microservices/service-communication.md
+      - API Gateway: mid-level/microservices/api-gateway.md
+      - Service Discovery: mid-level/microservices/service-discovery.md
+      - Circuit Breaker: mid-level/microservices/circuit-breaker.md
+      - Event Sourcing: mid-level/microservices/event-sourcing.md
+    - Performance Optimization:
+      - Genel Bakış: mid-level/performance-optimization/index.md
+      - Caching: mid-level/performance-optimization/caching.md
+      - Database Optimization: mid-level/performance-optimization/database-optimization.md
+      - Memory Management: mid-level/performance-optimization/memory-management.md
+      - Async Programming: mid-level/performance-optimization/async-programming.md
+      - Profiling: mid-level/performance-optimization/profiling.md
+    - Mimari:
+      - Genel Bakış: mid-level/architecture/index.md
+      - Distributed Locking: mid-level/architecture/distributed-locking.md
+    - Mülakat Örnekleri:
+      - Mülakat Örneği 1: mid-level/interview-examples/interview-1.md
+  - Senior Developer:
+    - System Design:
+      - Genel Bakış: senior/system-design/index.md
+      - Scalability: senior/system-design/scalability.md
+      - High Availability: senior/system-design/high-availability.md
+      - Load Balancing: senior/system-design/load-balancing.md
+      - Caching Strategies: senior/system-design/caching-strategies.md
+      - Database Sharding: senior/system-design/database-sharding.md
+    - Cloud Architecture:
+      - Genel Bakış: senior/cloud-architecture/index.md
+      - Azure Services: senior/cloud-architecture/azure-services.md
+      - AWS Services: senior/cloud-architecture/aws-services.md
+      - Containerization: senior/cloud-architecture/containerization.md
+      - Serverless: senior/cloud-architecture/serverless.md
+      - Cloud Security: senior/cloud-architecture/cloud-security.md
+    - DevOps Practices:
+      - Genel Bakış: senior/devops-practices/index.md
+      - CI/CD: senior/devops-practices/ci-cd.md
+      - Infrastructure as Code: senior/devops-practices/infrastructure-as-code.md
+      - Monitoring: senior/devops-practices/monitoring.md
+      - Logging: senior/devops-practices/logging.md
+      - Deployment Strategies: senior/devops-practices/deployment-strategies.md
+    - Advanced Security:
+      - Genel Bakış: senior/advanced-security/index.md
+      - OAuth2: senior/advanced-security/oauth2.md
+      - OpenID Connect: senior/advanced-security/openid-connect.md
+      - JWT: senior/advanced-security/jwt.md
+      - Security Headers: senior/advanced-security/security-headers.md
+      - Penetration Testing: senior/advanced-security/penetration-testing.md
+    - Mülakat Örnekleri:
+      - Mülakat Örneği 1: senior/interview-examples/interview-1.md
