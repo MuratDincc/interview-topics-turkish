@@ -61,7 +61,7 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde başarılı 
 
 ## 🤝 İletişim ve Takip
 
-- GitHub: [muratdincc](https://github.com/muratdincc)
+- GitHub: [muratdinc](https://github.com/muratdincc)
 - LinkedIn: [Murat Dinç](https://www.linkedin.com/in/muratdincc)
 - Medium: [Murat Dinç](https://medium.com/@muratdincc)
 
