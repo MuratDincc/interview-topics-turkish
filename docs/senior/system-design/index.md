@@ -1,79 +1,169 @@
-# Sistem Tasarımı
+# System Design
 
-## Genel Bakış
-Sistem tasarımı, büyük ölçekli ve karmaşık yazılım sistemlerinin mimarisini, bileşenlerini ve etkileşimlerini planlama ve tasarlama sürecidir. Bu süreç, sistemin gereksinimlerini karşılamak, ölçeklenebilirliği sağlamak, güvenilirliği artırmak ve bakımı kolaylaştırmak için kritik öneme sahiptir.
+## Giriş
 
-## Temel Kavramlar
+System Design, senior-level software engineers için kritik öneme sahip bir skill'dir. Large-scale, distributed systems tasarlamak, scalability, availability ve performance requirements'ları karşılamak için gereklidir. Bu bölüm, scalability, high availability, load balancing, caching strategies ve database sharding konularını kapsar.
 
-### 1. Sistem Mimarisi
-- **Monolitik Mimari**: Tüm bileşenlerin tek bir uygulamada birleştirildiği geleneksel mimari
-- **Mikroservis Mimari**: Bağımsız ve dağıtık servislerden oluşan modern mimari
-- **Event-Driven Mimari**: Olaylar üzerinden iletişim kuran sistemler
-- **Layered Mimari**: Katmanlı yapıda organize edilmiş sistemler
-- **Hexagonal Mimari**: Domain-driven design prensiplerine dayalı mimari
+## Kapsanan Konular
 
-### 2. Ölçeklenebilirlik
-- **Vertical Scaling**: Tek bir sunucunun kapasitesini artırma
-- **Horizontal Scaling**: Sunucu sayısını artırma
-- **Load Balancing**: Yük dengeleme stratejileri
-- **Caching**: Önbellekleme mekanizmaları
-- **Database Sharding**: Veritabanı parçalama
+### 1. Scalability
+Horizontal vs vertical scaling, scaling strategies, ve capacity planning.
 
-### 3. Güvenilirlik
-- **Fault Tolerance**: Hata toleransı
-- **High Availability**: Yüksek erişilebilirlik
-- **Disaster Recovery**: Felaket kurtarma
-- **Data Replication**: Veri çoğaltma
-- **Circuit Breaker**: Hata yönetimi
+**Öğrenilecekler:**
+- Horizontal scaling
+- Vertical scaling
+- Auto-scaling
+- Capacity planning
+- Performance optimization
+
+### 2. High Availability
+Fault tolerance, redundancy, ve disaster recovery strategies.
+
+**Öğrenilecekler:**
+- Fault tolerance patterns
+- Redundancy strategies
+- Disaster recovery
+- Failover mechanisms
+- Health monitoring
+
+### 3. Load Balancing
+Load distribution, traffic management, ve health checking.
+
+**Öğrenilecekler:**
+- Load balancing algorithms
+- Traffic distribution
+- Health checking
+- Session persistence
+- Geographic distribution
+
+### 4. Caching Strategies
+Multi-level caching, cache invalidation, ve cache distribution.
+
+**Öğrenilecekler:**
+- Multi-level caching
+- Cache invalidation
+- Cache distribution
+- Cache consistency
+- Cache performance
+
+### 5. Database Sharding
+Data partitioning, sharding strategies, ve cross-shard operations.
+
+**Öğrenilecekler:**
+- Sharding strategies
+- Data partitioning
+- Cross-shard operations
+- Shard management
+- Data consistency
+
+## Neden Önemli?
+
+### 1. **Large-Scale Systems**
+- Enterprise applications
+- Cloud services
+- Distributed systems
+- High-traffic applications
+- Mission-critical systems
+
+### 2. **Career Growth**
+- Senior engineer requirements
+- Technical leadership
+- Architecture decisions
+- System design interviews
+- Technical expertise
+
+### 3. **Business Impact**
+- System reliability
+- Performance optimization
+- Cost optimization
+- User experience
+- Competitive advantage
+
+### 4. **Technical Excellence**
+- Best practices
+- Proven patterns
+- Scalable solutions
+- Maintainable architecture
+- Future-proof design
+
+## Mülakat Soruları
+
+### Temel Sorular
+
+1. **System design nedir?**
+   - **Cevap**: Large-scale system architecture, scalability, availability, performance.
+
+2. **Scalability nedir?**
+   - **Cevap**: System capacity, performance improvement, resource utilization.
+
+3. **High availability nasıl sağlanır?**
+   - **Cevap**: Fault tolerance, redundancy, failover, health monitoring.
+
+4. **Load balancing nasıl çalışır?**
+   - **Cevap**: Traffic distribution, health checking, algorithm selection.
+
+5. **Database sharding nedir?**
+   - **Cevap**: Data partitioning, horizontal scaling, shard management.
+
+### Teknik Sorular
+
+1. **Horizontal scaling nasıl implement edilir?**
+   - **Cevap**: Stateless design, load balancing, data distribution, auto-scaling.
+
+2. **Fault tolerance nasıl sağlanır?**
+   - **Cevap**: Circuit breaker, retry policies, fallback mechanisms, health checks.
+
+3. **Cache consistency nasıl sağlanır?**
+   - **Cevap**: Cache invalidation, write-through, write-behind, eventual consistency.
+
+4. **Cross-shard transactions nasıl handle edilir?**
+   - **Cevap**: Saga pattern, two-phase commit, eventual consistency, compensation.
+
+5. **System monitoring nasıl yapılır?**
+   - **Cevap**: Metrics collection, alerting, health checks, performance monitoring.
 
 ## Best Practices
 
-### 1. Tasarım Prensipleri
-- **SOLID Prensipleri**: Tek sorumluluk, açık-kapalı, Liskov ikamesi, arayüz ayrımı, bağımlılık tersine çevirme
-- **DRY (Don't Repeat Yourself)**: Kod tekrarından kaçınma
-- **KISS (Keep It Simple, Stupid)**: Basitlik
-- **YAGNI (You Aren't Gonna Need It)**: Gereksiz karmaşıklıktan kaçınma
-- **Separation of Concerns**: İlgilerin ayrılması
+### 1. **Scalability Design**
+- Design for horizontal scaling
+- Use stateless services
+- Implement auto-scaling
+- Plan for capacity growth
+- Monitor performance
 
-### 2. Performans Optimizasyonu
-- **Caching Stratejileri**: Önbellekleme yaklaşımları
-- **Database Optimization**: Veritabanı optimizasyonu
-- **Asynchronous Processing**: Asenkron işleme
-- **Load Testing**: Yük testi
-- **Monitoring**: İzleme ve analiz
+### 2. **Availability Planning**
+- Implement redundancy
+- Design fault tolerance
+- Plan disaster recovery
+- Monitor system health
+- Test failover scenarios
 
-### 3. Güvenlik
-- **Authentication**: Kimlik doğrulama
-- **Authorization**: Yetkilendirme
-- **Encryption**: Şifreleme
-- **Security Headers**: Güvenlik başlıkları
-- **Vulnerability Scanning**: Güvenlik açığı taraması
+### 3. **Performance Optimization**
+- Use appropriate caching
+- Optimize database queries
+- Implement load balancing
+- Monitor bottlenecks
+- Plan for optimization
 
-## Sık Sorulan Sorular
+### 4. **Data Management**
+- Choose appropriate sharding
+- Plan for data growth
+- Implement backup strategies
+- Monitor data consistency
+- Plan for migration
 
-### 1. Sistem tasarımında hangi faktörler göz önünde bulundurulmalıdır?
-- Ölçeklenebilirlik gereksinimleri
-- Performans beklentileri
-- Güvenlik gereksinimleri
-- Bakım ve geliştirme kolaylığı
-- Maliyet ve kaynak kısıtlamaları
-
-### 2. Mikroservis mimarisi ne zaman tercih edilmelidir?
-- Büyük ve karmaşık sistemlerde
-- Farklı teknolojilerin kullanılması gerektiğinde
-- Bağımsız ölçeklendirme gerektiğinde
-- Sürekli dağıtım gerektiğinde
-- Takım organizasyonu için
-
-### 3. Sistem tasarımında hangi araçlar kullanılabilir?
-- Mimari diyagram araçları (Draw.io, Lucidchart)
-- API tasarım araçları (Swagger, Postman)
-- Prototipleme araçları (Figma, Adobe XD)
-- Monitoring araçları (Prometheus, Grafana)
-- CI/CD araçları (Jenkins, GitHub Actions)
+### 5. **Monitoring & Maintenance**
+- Implement comprehensive monitoring
+- Set up alerting
+- Monitor system health
+- Plan for maintenance
+- Document architecture
 
 ## Kaynaklar
+
 - [System Design Primer](https://github.com/donnemartin/system-design-primer)
-- [Microsoft Architecture Center](https://docs.microsoft.com/tr-tr/azure/architecture/)
-- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
-- [Google Cloud Architecture Framework](https://cloud.google.com/architecture/framework) 
+- [Scalable System Design](https://docs.microsoft.com/en-us/azure/architecture/guide/architecture-styles/scalable-web)
+- [High Availability](https://docs.microsoft.com/en-us/azure/architecture/guide/design-principles/high-availability)
+- [Load Balancing](https://docs.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview)
+- [Database Sharding](https://docs.microsoft.com/en-us/azure/azure-sql/database/sharding-overview)
+- [System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview) 

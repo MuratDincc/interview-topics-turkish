@@ -1,138 +1,165 @@
 # Design Patterns
 
-> 💡 **Ücretsiz Eğitim**: Tüm design pattern'leri detaylı olarak öğrenmek için [Design Patterns Eğitim Serisi](https://www.youtube.com/watch?v=qnywUzPq93w&list=PL8RMb0y6lf9s2YVmfmwRUcHZMB6Uuk3_V)'ni takip edebilirsiniz.
+## Giriş
 
-## Genel Bakış
-Design Patterns (Tasarım Kalıpları), yazılım geliştirmede sık karşılaşılan sorunlara önerilen, test edilmiş ve kanıtlanmış çözümlerdir. Bu kalıplar, kodun daha okunabilir, bakımı kolay ve yeniden kullanılabilir olmasını sağlar.
+Design patterns, yazılım geliştirmede karşılaşılan yaygın problemlere kanıtlanmış çözümler sunan, yeniden kullanılabilir tasarım şablonlarıdır. Mid-level geliştiriciler için design patterns'i anlamak, clean code yazmak, maintainable software geliştirmek ve software architecture konularında uzmanlaşmak için gereklidir. Bu bölüm, creational patterns, structural patterns, behavioral patterns, repository pattern ve unit of work pattern konularını kapsar.
 
-## İçindekiler
-1. **Creational Patterns (Oluşturucu Kalıplar)**
-   - Singleton
-   - Factory Method
-   - Abstract Factory
-   - Builder
-   - Prototype
+## Kapsanan Konular
 
-2. **Structural Patterns (Yapısal Kalıplar)**
-   - Adapter
-   - Bridge
-   - Composite
-   - Decorator
-   - Facade
-   - Flyweight
-   - Proxy
+### 1. Creational Patterns
+Object creation patterns, object instantiation strategies, ve creation logic encapsulation.
 
-3. **Behavioral Patterns (Davranışsal Kalıplar)**
-   - Chain of Responsibility
-   - Command
-   - Iterator
-   - Mediator
-   - Memento
-   - Observer
-   - State
-   - Strategy
-   - Template Method
-   - Visitor
+**Öğrenilecekler:**
+- Singleton pattern
+- Factory pattern
+- Builder pattern
+- Prototype pattern
+- Abstract Factory pattern
 
-4. **Repository Pattern**
-   - Repository Pattern'in tanımı ve kullanımı
-   - Generic Repository implementasyonu
-   - Repository Pattern avantajları ve dezavantajları
+### 2. Structural Patterns
+Object composition patterns, class relationships, ve structure organization.
 
-5. **Unit of Work**
-   - Unit of Work Pattern'in tanımı ve kullanımı
-   - Transaction yönetimi
-   - Repository Pattern ile birlikte kullanımı
+**Öğrenilecekler:**
+- Adapter pattern
+- Bridge pattern
+- Composite pattern
+- Decorator pattern
+- Facade pattern
 
-## Öğrenme Hedefleri
-Bu bölümü tamamladıktan sonra:
-- Her bir design pattern'in ne zaman ve nasıl kullanılacağını anlayabileceksiniz
-- Gerçek dünya senaryolarında design pattern'leri uygulayabileceksiniz
-- Kodunuzu daha modüler ve bakımı kolay hale getirebileceksiniz
-- Design pattern'lerin avantaj ve dezavantajlarını değerlendirebileceksiniz
+### 3. Behavioral Patterns
+Object communication patterns, responsibility distribution, ve behavior organization.
 
-## Ön Koşullar
-Bu bölümü takip etmek için:
-- Temel C# programlama bilgisi
-- Nesne yönelimli programlama (OOP) kavramlarına hakimiyet
-- Temel yazılım tasarım prensipleri bilgisi
+**Öğrenilecekler:**
+- Observer pattern
+- Strategy pattern
+- Command pattern
+- State pattern
+- Template Method pattern
+
+### 4. Repository Pattern
+Data access abstraction, data persistence logic, ve business logic separation.
+
+**Öğrenilecekler:**
+- Repository interface design
+- Data access abstraction
+- Business logic separation
+- Testability improvement
+- Dependency inversion
+
+### 5. Unit of Work Pattern
+Transaction management, data consistency, ve change tracking.
+
+**Öğrenilecekler:**
+- Transaction coordination
+- Change tracking
+- Data consistency
+- Rollback support
+- Unit of work lifecycle
+
+## Neden Önemli?
+
+### 1. **Code Quality**
+- Clean, maintainable code
+- Consistent architecture
+- Reduced complexity
+- Better readability
+
+### 2. **Software Design**
+- Proven solutions
+- Best practices
+- Architecture consistency
+- Design principles
+
+### 3. **Maintainability**
+- Easier modifications
+- Better extensibility
+- Reduced technical debt
+- Faster development
+
+### 4. **Team Collaboration**
+- Shared understanding
+- Consistent approach
+- Knowledge transfer
+- Code review support
+
+## Mülakat Soruları
+
+### Temel Sorular
+
+1. **Design pattern nedir?**
+   - **Cevap**: Reusable design solutions, proven approaches, common problems.
+
+2. **Creational patterns nelerdir?**
+   - **Cevap**: Object creation patterns, instantiation strategies, creation logic.
+
+3. **Structural patterns nelerdir?**
+   - **Cevap**: Object composition, class relationships, structure organization.
+
+4. **Behavioral patterns nelerdir?**
+   - **Cevap**: Object communication, responsibility distribution, behavior.
+
+5. **Repository pattern nedir?**
+   - **Cevap**: Data access abstraction, business logic separation, testability.
+
+### Teknik Sorular
+
+1. **Singleton pattern nasıl implement edilir?**
+   - **Cevap**: Private constructor, static instance, thread safety.
+
+2. **Factory pattern ne zaman kullanılır?**
+   - **Cevap**: Complex object creation, conditional instantiation, dependency management.
+
+3. **Observer pattern nasıl çalışır?**
+   - **Cevap**: Subject-observer relationship, event notification, loose coupling.
+
+4. **Repository pattern nasıl implement edilir?**
+   - **Cevap**: Interface design, data access abstraction, dependency injection.
+
+5. **Unit of Work pattern nasıl çalışır?**
+   - **Cevap**: Transaction coordination, change tracking, data consistency.
 
 ## Best Practices
-1. **Pattern Seçimi**
-   - Sorunu doğru analiz edin
-   - En uygun pattern'i seçin
-   - Pattern'i gereksiz yere kullanmayın
-   - Pattern'leri birleştirmekten çekinmeyin
 
-2. **Uygulama**
-   - SOLID prensiplerini takip edin
-   - Kod okunabilirliğini koruyun
-   - Test edilebilirliği göz önünde bulundurun
-   - Documentation ekleyin
+### 1. **Pattern Selection**
+- Choose appropriate patterns
+- Avoid over-engineering
+- Consider maintainability
+- Plan for evolution
+- Document decisions
 
-3. **Bakım**
-   - Kod tekrarından kaçının
-   - Pattern'leri gerektiğinde güncelleyin
-   - Performans etkilerini değerlendirin
-   - Team review yapın
+### 2. **Implementation**
+- Follow pattern structure
+- Maintain consistency
+- Handle edge cases
+- Plan for testing
+- Consider performance
 
-## Örnek Proje Yapısı
-```plaintext
-DesignPatterns/
-├── Creational/
-│   ├── Singleton/
-│   ├── FactoryMethod/
-│   ├── AbstractFactory/
-│   ├── Builder/
-│   └── Prototype/
-├── Structural/
-│   ├── Adapter/
-│   ├── Bridge/
-│   ├── Composite/
-│   ├── Decorator/
-│   ├── Facade/
-│   ├── Flyweight/
-│   └── Proxy/
-└── Behavioral/
-    ├── ChainOfResponsibility/
-    ├── Command/
-    ├── Iterator/
-    ├── Mediator/
-    ├── Memento/
-    ├── Observer/
-    ├── State/
-    ├── Strategy/
-    ├── TemplateMethod/
-    └── Visitor/
-```
+### 3. **Documentation**
+- Document pattern usage
+- Explain design decisions
+- Provide examples
+- Update documentation
+- Share knowledge
 
-## Sık Sorulan Sorular
-1. **Design Pattern'ler ne zaman kullanılmalıdır?**
-   - Tekrar eden sorunlarla karşılaşıldığında
-   - Kodun bakımı zorlaştığında
-   - Yeni özellikler eklenmesi gerektiğinde
-   - Test edilebilirlik gerektiğinde
+### 4. **Testing**
+- Test pattern implementations
+- Mock dependencies
+- Test edge cases
+- Monitor performance
+- Plan for maintenance
 
-2. **Hangi pattern'i seçmeliyim?**
-   - Sorunun doğasına göre
-   - Projenin gereksinimlerine göre
-   - Takımın tecrübesine göre
-   - Performans gereksinimlerine göre
-
-3. **Pattern'ler performansı etkiler mi?**
-   - Bazı pattern'ler ekstra katman ekler
-   - Memory kullanımını artırabilir
-   - Doğru kullanıldığında performansı iyileştirebilir
-   - Trade-off'ları değerlendirin
-
-4. **Pattern'ler nasıl test edilir?**
-   - Unit testler yazın
-   - Mock'lar kullanın
-   - Integration testler yapın
-   - Code coverage'ı takip edin
+### 5. **Evolution**
+- Plan for changes
+- Maintain flexibility
+- Consider alternatives
+- Monitor usage
+- Refactor when needed
 
 ## Kaynaklar
-- [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612)
-- [Head First Design Patterns](https://www.amazon.com/Head-First-Design-Patterns-Brain-Friendly/dp/149207800X)
-- [Microsoft Design Patterns](https://docs.microsoft.com/tr-tr/archive/msdn-magazine/2009/brownfield/patterns-in-practice)
-- [Refactoring Guru](https://refactoring.guru/design-patterns) 
+
+- [Design Patterns](https://refactoring.guru/design-patterns)
+- [Gang of Four Patterns](https://en.wikipedia.org/wiki/Design_Patterns)
+- [Repository Pattern](https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application)
+- [Unit of Work Pattern](https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application)
+- [.NET Design Patterns](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles)
+- [SOLID Principles](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#solid-principles) 

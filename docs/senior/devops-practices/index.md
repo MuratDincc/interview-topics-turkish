@@ -1,107 +1,169 @@
 # DevOps Practices
 
-## Genel Bakış
-DevOps, yazılım geliştirme (Development) ve operasyon (Operations) ekiplerinin işbirliğini ve iletişimini artırmayı hedefleyen bir kültür, felsefe ve uygulamalar bütünüdür. Bu yaklaşım, yazılım geliştirme süreçlerini otomatikleştirerek, sürekli entegrasyon ve sürekli dağıtım (CI/CD) sağlayarak, daha hızlı ve güvenilir yazılım teslimatına olanak tanır.
+## Giriş
 
-## Temel Kavramlar
+DevOps Practices, modern software development'da development ve operations arasındaki collaboration, automation ve continuous improvement için kritik öneme sahiptir. Senior-level developers için DevOps practices'i anlamak, CI/CD pipelines implement etmek, infrastructure automation yapmak ve operational excellence sağlamak için gereklidir. Bu bölüm, CI/CD, infrastructure as code, monitoring, logging ve deployment strategies konularını kapsar.
 
-### 1. CI/CD (Sürekli Entegrasyon ve Sürekli Dağıtım)
-- Kod değişikliklerinin sık ve otomatik entegrasyonu
-- Otomatik test ve doğrulama süreçleri
-- Otomatik dağıtım ve yayınlama
-- Hızlı geri bildirim döngüleri
-- Kalite güvence süreçleri
+## Kapsanan Konular
 
-### 2. Infrastructure as Code (Altyapı Kod Olarak)
-- Altyapı tanımlarının kod olarak yönetimi
-- Versiyon kontrolü
-- Otomatik altyapı sağlama
-- Tutarlı ortam yönetimi
-- Değişiklik yönetimi
+### 1. CI/CD
+Continuous Integration, Continuous Delivery, ve deployment automation.
 
-### 3. Monitoring (İzleme)
-- Uygulama performans izleme
-- Sistem sağlığı kontrolü
-- Metrik toplama ve analiz
-- Alert yönetimi
-- Performans optimizasyonu
+**Öğrenilecekler:**
+- CI/CD pipeline design
+- Build automation
+- Test automation
+- Deployment automation
+- Pipeline optimization
 
-### 4. Logging (Günlükleme)
-- Log toplama ve yönetimi
-- Log analizi
-- Log rotasyonu
-- Log seviyeleri
-- Log güvenliği
+### 2. Infrastructure as Code
+Infrastructure automation, configuration management, ve infrastructure versioning.
 
-### 5. Deployment Strategies (Dağıtım Stratejileri)
-- Blue-Green Deployment
-- Canary Deployment
-- Rolling Deployment
-- A/B Testing
-- Feature Flags
+**Öğrenilecekler:**
+- Infrastructure automation
+- Configuration management
+- Infrastructure versioning
+- Infrastructure testing
+- Infrastructure monitoring
+
+### 3. Monitoring
+System monitoring, application monitoring, ve operational monitoring.
+
+**Öğrenilecekler:**
+- System monitoring
+- Application monitoring
+- Performance monitoring
+- Alerting systems
+- Dashboard creation
+
+### 4. Logging
+Centralized logging, log aggregation, ve log analysis.
+
+**Öğrenilecekler:**
+- Centralized logging
+- Log aggregation
+- Log analysis
+- Log retention
+- Log security
+
+### 5. Deployment Strategies
+Blue-green deployment, rolling deployment, ve canary deployment.
+
+**Öğrenilecekler:**
+- Blue-green deployment
+- Rolling deployment
+- Canary deployment
+- Rollback strategies
+- Deployment monitoring
+
+## Neden Önemli?
+
+### 1. **Operational Excellence**
+- Faster delivery
+- Better quality
+- Reduced errors
+- Improved collaboration
+- Continuous improvement
+
+### 2. **Business Impact**
+- Faster time to market
+- Better customer satisfaction
+- Reduced costs
+- Improved reliability
+- Competitive advantage
+
+### 3. **Technical Excellence**
+- Automation
+- Best practices
+- Proven patterns
+- Quality improvement
+- Risk reduction
+
+### 4. **Team Collaboration**
+- Development and operations
+- Shared responsibility
+- Better communication
+- Knowledge sharing
+- Continuous learning
+
+## Mülakat Soruları
+
+### Temel Sorular
+
+1. **DevOps nedir?**
+   - **Cevap**: Development and operations collaboration, automation, continuous improvement.
+
+2. **CI/CD nedir?**
+   - **Cevap**: Continuous integration, continuous delivery, deployment automation.
+
+3. **Infrastructure as Code nedir?**
+   - **Cevap**: Infrastructure automation, configuration management, versioning.
+
+4. **Monitoring neden önemlidir?**
+   - **Cevap**: System health, performance tracking, issue detection, alerting.
+
+5. **Deployment strategies nelerdir?**
+   - **Cevap**: Blue-green, rolling, canary deployment, rollback strategies.
+
+### Teknik Sorular
+
+1. **CI/CD pipeline nasıl design edilir?**
+   - **Cevap**: Build stages, test automation, deployment automation, monitoring.
+
+2. **Infrastructure as Code nasıl implement edilir?**
+   - **Cevap**: Terraform, ARM templates, CloudFormation, configuration management.
+
+3. **Monitoring system nasıl kurulur?**
+   - **Cevap**: Metrics collection, alerting, dashboard creation, performance tracking.
+
+4. **Logging system nasıl implement edilir?**
+   - **Cevap**: Centralized logging, log aggregation, log analysis, retention policies.
+
+5. **Blue-green deployment nasıl çalışır?**
+   - **Cevap**: Environment switching, health checks, rollback strategies, monitoring.
 
 ## Best Practices
 
-### 1. CI/CD Best Practices
-- Otomatik test entegrasyonu
-- Pipeline optimizasyonu
-- Güvenlik kontrolleri
-- Hızlı geri bildirim
-- Kalite güvence
+### 1. **CI/CD Implementation**
+- Automate everything
+- Implement testing
+- Monitor pipeline health
+- Optimize performance
+- Plan for scaling
 
-### 2. Infrastructure as Code Best Practices
-- Modüler yapı
-- Versiyon kontrolü
-- Test edilebilirlik
-- Dokümantasyon
-- Güvenlik
+### 2. **Infrastructure Management**
+- Use version control
+- Implement testing
+- Monitor changes
+- Plan for rollback
+- Document everything
 
-### 3. Monitoring Best Practices
-- Proaktif izleme
-- Alert yapılandırması
-- Kapasite planlama
-- Performans optimizasyonu
-- SLA takibi
+### 3. **Monitoring Strategy**
+- Define key metrics
+- Set up alerting
+- Create dashboards
+- Monitor performance
+- Plan for improvement
 
-### 4. Logging Best Practices
-- Yapılandırılmış loglama
-- Log rotasyonu
-- Log analizi
-- Güvenlik
-- Performans
+### 4. **Logging Strategy**
+- Centralize logs
+- Implement retention
+- Secure log access
+- Analyze logs
+- Plan for scaling
 
-### 5. Deployment Best Practices
-- Risk minimizasyonu
-- Rollback stratejileri
-- Canlı ortam testleri
-- Kullanıcı deneyimi
-- İş sürekliliği
-
-## Sık Sorulan Sorular
-
-### 1. DevOps neden önemlidir?
-- Hızlı yazılım teslimatı
-- Kalite artışı
-- Maliyet optimizasyonu
-- İşbirliği gelişimi
-- Risk azaltma
-
-### 2. DevOps nasıl uygulanır?
-- Kültür değişimi
-- Araç seçimi
-- Süreç otomasyonu
-- Ekip eğitimi
-- Metrik takibi
-
-### 3. DevOps zorlukları nelerdir?
-- Kültür değişimi
-- Araç entegrasyonu
-- Beceri geliştirme
-- Süreç adaptasyonu
-- Kaynak yönetimi
+### 5. **Deployment Strategy**
+- Choose appropriate strategy
+- Implement health checks
+- Plan for rollback
+- Monitor deployments
+- Plan for improvement
 
 ## Kaynaklar
-- [DevOps Documentation](https://docs.microsoft.com/tr-tr/devops/)
-- [DevOps Best Practices](https://docs.microsoft.com/tr-tr/devops/develop/devops-at-microsoft)
-- [DevOps Tools](https://docs.microsoft.com/tr-tr/devops/develop/devops-tools)
-- [DevOps Culture](https://docs.microsoft.com/tr-tr/devops/develop/devops-culture) 
+
+- [DevOps Practices](https://docs.microsoft.com/en-us/azure/devops/learn/what-is-devops)
+- [CI/CD Best Practices](https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines)
+- [Infrastructure as Code](https://docs.microsoft.com/en-us/azure/developer/terraform/)
+- [Monitoring Best Practices](https://docs.microsoft.com/en-us/azure/azure-monitor/overview)
+- [Logging Best Practices](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview)
+- [Deployment Strategies](https://docs.microsoft.com/en-us/azure/architecture/guide/technology-choices/deployment-strategies) 

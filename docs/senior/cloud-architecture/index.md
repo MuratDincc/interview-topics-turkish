@@ -1,113 +1,169 @@
-# Bulut Mimarisi
+# Cloud Architecture
 
-## Genel Bakış
-Bulut mimarisi, uygulamaların ve sistemlerin bulut platformları üzerinde tasarlanması, geliştirilmesi ve yönetilmesi için kullanılan bir yaklaşımdır. Bulut mimarisi, ölçeklenebilirlik, esneklik, güvenlik ve maliyet optimizasyonu gibi temel prensipleri içerir.
+## Giriş
 
-## Temel Kavramlar
+Cloud Architecture, modern software development'da scalability, flexibility ve cost optimization için kritik öneme sahiptir. Senior-level developers için cloud architecture'i anlamak, cloud-native applications geliştirmek, multi-cloud strategies implement etmek ve cloud migration planlamak için gereklidir. Bu bölüm, Azure services, AWS services, containerization, serverless ve cloud security konularını kapsar.
 
-### 1. Bulut Hizmet Modelleri
-- **IaaS (Infrastructure as a Service)**: Temel altyapı kaynaklarının (sunucular, depolama, ağ) bulut üzerinden sağlanması
-- **PaaS (Platform as a Service)**: Geliştirme ve dağıtım platformlarının bulut üzerinden sağlanması
-- **SaaS (Software as a Service)**: Yazılım uygulamalarının bulut üzerinden hizmet olarak sunulması
-
-### 2. Bulut Dağıtım Modelleri
-- **Public Cloud**: Genel kullanıma açık bulut hizmetleri
-- **Private Cloud**: Özel kullanım için ayrılmış bulut hizmetleri
-- **Hybrid Cloud**: Public ve private cloud'ların birlikte kullanımı
-- **Multi-Cloud**: Birden fazla bulut sağlayıcısının birlikte kullanımı
-
-### 3. Bulut Tasarım Prensipleri
-- **Ölçeklenebilirlik**: Yatay ve dikey ölçeklendirme
-- **Esneklik**: Dinamik kaynak yönetimi
-- **Güvenilirlik**: Yüksek erişilebilirlik ve hata toleransı
-- **Güvenlik**: Veri koruma ve erişim kontrolü
-- **Maliyet Optimizasyonu**: Kaynak kullanımının optimize edilmesi
-
-## Bulut Servisleri
+## Kapsanan Konular
 
 ### 1. Azure Services
-- Compute Services
-- Storage Services
-- Networking Services
-- Database Services
-- AI & Machine Learning Services
+Microsoft Azure cloud services, Azure architecture patterns, ve Azure best practices.
+
+**Öğrenilecekler:**
+- Azure compute services
+- Azure storage services
+- Azure networking
+- Azure security
+- Azure monitoring
 
 ### 2. AWS Services
-- Compute Services
-- Storage Services
-- Networking Services
-- Database Services
-- AI & Machine Learning Services
+Amazon Web Services, AWS architecture patterns, ve AWS best practices.
+
+**Öğrenilecekler:**
+- AWS compute services
+- AWS storage services
+- AWS networking
+- AWS security
+- AWS monitoring
 
 ### 3. Containerization
-- Docker
-- Kubernetes
-- Container Orchestration
-- Container Security
-- Container Monitoring
+Docker, container orchestration, ve container-based architecture.
 
-### 4. Serverless Architecture
-- Function as a Service (FaaS)
-- Event-Driven Architecture
-- Serverless Patterns
-- Cold Start Optimization
-- Cost Optimization
+**Öğrenilecekler:**
+- Docker containers
+- Container orchestration
+- Kubernetes
+- Container security
+- Container monitoring
+
+### 4. Serverless
+Function-as-a-Service, serverless architecture, ve serverless patterns.
+
+**Öğrenilecekler:**
+- FaaS platforms
+- Serverless patterns
+- Event-driven architecture
+- Cost optimization
+- Performance considerations
 
 ### 5. Cloud Security
-- Identity and Access Management
-- Network Security
-- Data Protection
-- Compliance
-- Security Monitoring
+Cloud security best practices, identity management, ve security monitoring.
+
+**Öğrenilecekler:**
+- Identity and access management
+- Network security
+- Data encryption
+- Security monitoring
+- Compliance requirements
+
+## Neden Önemli?
+
+### 1. **Modern Development**
+- Cloud-native applications
+- Scalable architecture
+- Cost optimization
+- Global deployment
+- Rapid development
+
+### 2. **Business Requirements**
+- Scalability needs
+- Cost optimization
+- Global presence
+- Compliance requirements
+- Competitive advantage
+
+### 3. **Technical Excellence**
+- Best practices
+- Proven patterns
+- Security standards
+- Performance optimization
+- Future-proof design
+
+### 4. **Career Growth**
+- Senior engineer requirements
+- Cloud expertise
+- Architecture decisions
+- Technical leadership
+- Industry knowledge
+
+## Mülakat Soruları
+
+### Temel Sorular
+
+1. **Cloud architecture nedir?**
+   - **Cevap**: Cloud-based system design, scalability, cost optimization, global deployment.
+
+2. **Azure vs AWS farkları nelerdir?**
+   - **Cevap**: Service offerings, pricing models, integration, ecosystem, support.
+
+3. **Containerization nedir?**
+   - **Cevap**: Application packaging, deployment consistency, resource isolation, portability.
+
+4. **Serverless nedir?**
+   - **Cevap**: FaaS, event-driven, auto-scaling, cost optimization, managed services.
+
+5. **Cloud security nasıl sağlanır?**
+   - **Cevap**: Identity management, network security, data encryption, monitoring, compliance.
+
+### Teknik Sorular
+
+1. **Multi-cloud strategy nasıl implement edilir?**
+   - **Cevap**: Service abstraction, cloud-agnostic design, cost optimization, risk mitigation.
+
+2. **Container orchestration nasıl çalışır?**
+   - **Cevap**: Kubernetes, service discovery, load balancing, auto-scaling, health monitoring.
+
+3. **Cloud migration nasıl planlanır?**
+   - **Cevap**: Assessment, strategy, execution, testing, optimization.
+
+4. **Serverless performance nasıl optimize edilir?**
+   - **Cevap**: Cold start optimization, function design, resource allocation, monitoring.
+
+5. **Cloud cost optimization nasıl yapılır?**
+   - **Cevap**: Resource optimization, auto-scaling, reserved instances, monitoring, optimization.
 
 ## Best Practices
 
-### 1. Servis Seçimi ve Entegrasyon
-- İş gereksinimlerine uygun servis seçimi
-- Servisler arası entegrasyon stratejileri
-- API tasarımı ve yönetimi
-- Servis versiyonlama
-- Servis dokümantasyonu
+### 1. **Cloud Design**
+- Design for scalability
+- Use managed services
+- Implement security first
+- Plan for cost optimization
+- Monitor performance
 
-### 2. Güvenlik ve Uyumluluk
-- Zero-trust güvenlik modeli
-- Şifreleme ve anahtar yönetimi
-- Erişim kontrolü ve kimlik doğrulama
-- Güvenlik duvarı ve ağ güvenliği
-- Uyumluluk standartları
+### 2. **Multi-Cloud Strategy**
+- Service abstraction
+- Cloud-agnostic design
+- Cost optimization
+- Risk mitigation
+- Vendor lock-in avoidance
 
-### 3. Operasyonel Mükemmellik
-- CI/CD pipeline'ları
-- Otomatik ölçeklendirme
-- Monitoring ve alerting
-- Yedekleme ve felaket kurtarma
-- Performans optimizasyonu
+### 3. **Security Implementation**
+- Identity management
+- Network security
+- Data encryption
+- Security monitoring
+- Compliance adherence
 
-## Sık Sorulan Sorular
+### 4. **Performance Optimization**
+- Use appropriate services
+- Implement caching
+- Optimize networking
+- Monitor performance
+- Plan for scaling
 
-### 1. Bulut servisleri arasında nasıl seçim yapılır?
-- İş gereksinimleri analizi
-- Maliyet analizi
-- Ölçeklenebilirlik gereksinimleri
-- Güvenlik gereksinimleri
-- Entegrasyon kolaylığı
-
-### 2. Bulut maliyetlerini nasıl optimize edebiliriz?
-- Kaynak kullanımını izleme
-- Otomatik ölçeklendirme
-- Rezerve edilmiş örnekler
-- Spot örnekleri
-- Kullanılmayan kaynakları kapatma
-
-### 3. Bulut güvenliği nasıl sağlanır?
-- Güvenlik duvarı kuralları
-- Şifreleme
-- Erişim kontrolü
-- Güvenlik izleme
-- Güvenlik testleri
+### 5. **Cost Management**
+- Resource optimization
+- Auto-scaling
+- Reserved instances
+- Cost monitoring
+- Regular optimization
 
 ## Kaynaklar
-- [Microsoft Cloud Architecture](https://docs.microsoft.com/tr-tr/azure/architecture/guide/)
-- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
-- [Google Cloud Architecture](https://cloud.google.com/architecture)
-- [Cloud Design Patterns](https://docs.microsoft.com/tr-tr/azure/architecture/patterns/) 
+
+- [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architecture/)
+- [AWS Architecture Center](https://aws.amazon.com/architecture/)
+- [Container Best Practices](https://docs.microsoft.com/en-us/azure/architecture/guide/technology-choices/containers)
+- [Serverless Architecture](https://docs.microsoft.com/en-us/azure/architecture/guide/architecture-styles/serverless)
+- [Cloud Security](https://docs.microsoft.com/en-us/azure/security/)
+- [Multi-Cloud Strategy](https://docs.microsoft.com/en-us/azure/architecture/guide/technology-choices/multi-cloud) 

@@ -1,120 +1,165 @@
 # Clean Architecture
 
-## Genel Bakış
-Clean Architecture, Robert C. Martin tarafından önerilen bir yazılım mimarisi yaklaşımıdır. Bu mimari, uygulamanın farklı katmanlarını birbirinden bağımsız hale getirerek, bağımlılıkları minimize etmeyi ve kodun bakımını kolaylaştırmayı amaçlar.
+## Giriş
 
-## Temel Prensipler
-1. **Bağımlılık Kuralı**
-   - İç katmanlar dış katmanlara bağımlı olmamalıdır
-   - Bağımlılıklar her zaman içe doğru olmalıdır
-   - Dış katmanlar iç katmanların detaylarını bilmemelidir
+Clean Architecture, software design'da dependency direction, separation of concerns ve maintainability için kritik öneme sahip bir architectural pattern'dir. Mid-level geliştiriciler için Clean Architecture'i anlamak, scalable, maintainable ve testable software geliştirmek için gereklidir. Bu bölüm, domain layer, application layer, infrastructure layer, presentation layer ve cross-cutting concerns konularını kapsar.
 
-2. **Soyutlama Kuralı**
-   - İç katmanlar soyutlamaları tanımlar
-   - Dış katmanlar bu soyutlamaları uygular
-   - Katmanlar arası iletişim interface'ler üzerinden yapılır
+## Kapsanan Konular
 
-3. **Bağımsızlık Kuralı**
-   - Her katman bağımsız olarak geliştirilebilir
-   - Her katman bağımsız olarak test edilebilir
-   - Her katman bağımsız olarak deploy edilebilir
+### 1. Domain Layer
+Business logic, entities, value objects, ve domain services.
 
-## Katmanlar
-1. **Domain Layer (İç Katman)**
-   - İş mantığının merkezi
-   - Entity'ler ve business rules
-   - Dış dünyadan tamamen bağımsız
+**Öğrenilecekler:**
+- Domain entities
+- Value objects
+- Domain services
+- Business rules
+- Domain events
 
-2. **Application Layer**
-   - Use case'lerin implementasyonu
-   - Domain layer ile dış katmanlar arası köprü
-   - Business logic koordinasyonu
+### 2. Application Layer
+Use cases, application services, ve orchestration logic.
 
-3. **Interface Layer**
-   - Kullanıcı arayüzü
-   - API endpoints
-   - Dış dünya ile iletişim
+**Öğrenilecekler:**
+- Use case implementation
+- Application services
+- Command/Query separation
+- Application logic
+- Service orchestration
 
-4. **Infrastructure Layer**
-   - Veritabanı işlemleri
-   - Harici servis entegrasyonları
-   - Framework ve kütüphane kullanımı
+### 3. Infrastructure Layer
+External concerns, data access, ve third-party integrations.
 
-## Avantajları
-- Bağımlılıkların minimize edilmesi
-- Test edilebilirliğin artması
-- Kodun bakımının kolaylaştırılması
-- Esnek ve ölçeklenebilir yapı
-- Framework bağımsızlığı
+**Öğrenilecekler:**
+- Data access implementation
+- External service integration
+- Configuration management
+- Logging implementation
+- Caching implementation
 
-## Dezavantajları
-- Başlangıçta daha fazla kod yazma gerekliliği
-- Karmaşık projelerde öğrenme eğrisi
-- Performans optimizasyonu gerekliliği
-- Over-engineering riski
+### 4. Presentation Layer
+User interface, API controllers, ve presentation logic.
+
+**Öğrenilecekler:**
+- API design
+- Controller implementation
+- View models
+- Presentation logic
+- User interface
+
+### 5. Cross-Cutting Concerns
+Logging, security, caching, ve configuration management.
+
+**Öğrenilecekler:**
+- Cross-cutting concerns
+- Middleware implementation
+- Aspect-oriented programming
+- Configuration management
+- Security implementation
+
+## Neden Önemli?
+
+### 1. **Maintainability**
+- Clear separation of concerns
+- Easy to understand
+- Simple to modify
+- Reduced complexity
+
+### 2. **Testability**
+- Isolated components
+- Easy to mock
+- Unit testable
+- Integration testable
+
+### 3. **Scalability**
+- Modular design
+- Easy to extend
+- Loose coupling
+- High cohesion
+
+### 4. **Team Collaboration**
+- Clear boundaries
+- Shared understanding
+- Parallel development
+- Knowledge transfer
+
+## Mülakat Soruları
+
+### Temel Sorular
+
+1. **Clean Architecture nedir?**
+   - **Cevap**: Dependency direction, separation of concerns, maintainable design.
+
+2. **Domain Layer nedir?**
+   - **Cevap**: Business logic, entities, value objects, domain services.
+
+3. **Application Layer nedir?**
+   - **Cevap**: Use cases, application services, orchestration logic.
+
+4. **Infrastructure Layer nedir?**
+   - **Cevap**: External concerns, data access, third-party integrations.
+
+5. **Presentation Layer nedir?**
+   - **Cevap**: User interface, API controllers, presentation logic.
+
+### Teknik Sorular
+
+1. **Dependency direction nasıl sağlanır?**
+   - **Cevap**: Dependency inversion, abstraction usage, interface design.
+
+2. **Cross-cutting concerns nasıl handle edilir?**
+   - **Cevap**: Middleware, aspect-oriented programming, configuration.
+
+3. **Domain events nasıl implement edilir?**
+   - **Cevap**: Event publishing, event handling, event sourcing.
+
+4. **Use case pattern nasıl uygulanır?**
+   - **Cevap**: Command/Query separation, application services, orchestration.
+
+5. **Repository pattern nasıl implement edilir?**
+   - **Cevap**: Interface design, data access abstraction, dependency injection.
 
 ## Best Practices
-1. **Katmanlar Arası İletişim**
-   - Interface'ler kullanın
-   - DTO'lar ile veri transferi yapın
-   - Dependency injection kullanın
-   - Event-driven mimariyi tercih edin
 
-2. **Kod Organizasyonu**
-   - Her katmanı ayrı projede tutun
-   - Feature-based organizasyon yapın
-   - SOLID prensiplerini uygulayın
-   - DRY prensibine uyun
+### 1. **Layer Design**
+- Clear boundaries
+- Single responsibility
+- Dependency direction
+- Interface segregation
+- Abstraction usage
 
-3. **Test Stratejisi**
-   - Unit testler yazın
-   - Integration testler yazın
-   - Test coverage'ı takip edin
-   - Mock ve stub kullanın
+### 2. **Domain Modeling**
+- Rich domain models
+- Value objects
+- Domain services
+- Business rules
+- Domain events
 
-## Örnek Proje Yapısı
-```
-src/
-├── Domain/
-│   ├── Entities/
-│   ├── ValueObjects/
-│   ├── Interfaces/
-│   └── Exceptions/
-├── Application/
-│   ├── Services/
-│   ├── DTOs/
-│   ├── Mappings/
-│   └── Validators/
-├── Infrastructure/
-│   ├── Persistence/
-│   ├── ExternalServices/
-│   └── Logging/
-└── Presentation/
-    ├── Controllers/
-    ├── Views/
-    └── Middleware/
-```
+### 3. **Dependency Management**
+- Dependency inversion
+- Interface design
+- Service registration
+- Lifecycle management
+- Configuration
 
-## Sık Sorulan Sorular
-1. **Clean Architecture ne zaman kullanılmalıdır?**
-   - Büyük ve karmaşık projelerde
-   - Uzun ömürlü projelerde
-   - Sık değişim gerektiren projelerde
-   - Test edilebilirlik önemli olduğunda
+### 4. **Testing Strategy**
+- Unit testing
+- Integration testing
+- Mock usage
+- Test isolation
+- Coverage planning
 
-2. **Clean Architecture ile Microservices arasındaki fark nedir?**
-   - Clean Architecture bir mimari yaklaşımıdır
-   - Microservices bir deployment stratejisidir
-   - İkisi birlikte kullanılabilir
-   - Her microservice Clean Architecture ile tasarlanabilir
-
-3. **Clean Architecture performansı nasıl etkiler?**
-   - Başlangıçta performans maliyeti olabilir
-   - Doğru implementasyon ile minimize edilebilir
-   - Caching stratejileri ile optimize edilebilir
-   - Asenkron işlemler ile iyileştirilebilir
+### 5. **Documentation**
+- Architecture documentation
+- API documentation
+- Code documentation
+- Design decisions
+- Knowledge sharing
 
 ## Kaynaklar
-- [Clean Architecture - Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [Microsoft Clean Architecture](https://docs.microsoft.com/tr-tr/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture)
-- [Clean Architecture with ASP.NET Core](https://docs.microsoft.com/tr-tr/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture) 
+
+- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+- [Clean Architecture in .NET](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#clean-architecture)
+- [Domain-Driven Design](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
+- [CQRS Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+- [Repository Pattern](https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application)
+- [Clean Architecture Examples](https://github.com/jasontaylordev/CleanArchitecture) 

@@ -2,319 +2,164 @@
 
 ## Giriş
 
-Caching (önbellekleme), uygulama performansını artırmak için sık kullanılan verilerin geçici olarak saklanması işlemidir. .NET uygulamalarında farklı caching stratejileri ve yaklaşımları bulunmaktadır.
+Caching stratejileri, modern .NET uygulamalarında performans optimizasyonu için kritik öneme sahiptir. Mid-level geliştiriciler için caching'in farklı türlerini anlamak, uygun caching stratejilerini seçmek ve implement etmek, production-ready uygulamalar geliştirmek için gereklidir. Bu bölüm, in-memory caching, distributed caching, cache invalidation, cache patterns ve Redis kullanımı konularını kapsar.
 
-## Caching'in Önemi
+## Kapsanan Konular
 
-1. **Performans İyileştirmesi**
-   - Veritabanı yükünü azaltma
-   - Yanıt sürelerini kısaltma
-   - Sistem kaynaklarını verimli kullanma
+### 1. In-Memory Caching
+Application memory'de veri saklama, memory management, ve in-memory cache optimization.
 
-2. **Ölçeklenebilirlik**
-   - Yük dengeleme
-   - Sistem yükünü dağıtma
-   - Kaynak kullanımını optimize etme
+**Öğrenilecekler:**
+- IMemoryCache interface
+- Memory cache configuration
+- Cache size management
+- Memory pressure handling
+- Cache eviction policies
 
-3. **Maliyet Optimizasyonu**
-   - Veritabanı maliyetlerini azaltma
-   - Bant genişliği kullanımını optimize etme
-   - İşlem maliyetlerini düşürme
+### 2. Distributed Caching
+Multiple application instances arasında cache sharing, cache synchronization, ve distributed cache management.
 
-## Caching Türleri
+**Öğrenilecekler:**
+- IDistributedCache interface
+- Cache serialization
+- Cache synchronization
+- Network latency handling
+- Cache consistency
 
-1. **In-Memory Caching**
-   - Uygulama içi önbellekleme
-   - Distributed Cache
-   - Memory Cache
+### 3. Cache Invalidation
+Cache data freshness management, invalidation strategies, ve cache coherence.
 
-2. **Distributed Caching**
-   - Redis
-   - NCache
-   - Memcached
+**Öğrenilecekler:**
+- Time-based expiration
+- Event-based invalidation
+- Cache dependency invalidation
+- Manual invalidation
+- Cache warming strategies
 
-3. **Response Caching**
-   - HTTP Response Caching
-   - Output Caching
-   - Response Compression
+### 4. Cache Patterns
+Common caching patterns, best practices, ve anti-patterns.
 
-4. **Database Caching**
-   - Query Result Caching
-   - Stored Procedure Caching
-   - Materialized Views
+**Öğrenilecekler:**
+- Cache-Aside pattern
+- Write-Through pattern
+- Write-Behind pattern
+- Refresh-Ahead pattern
+- Cache-As-SoF pattern
 
-## Caching Stratejileri
+### 5. Redis Kullanımı
+Redis cache server integration, Redis data structures, ve Redis optimization.
 
-1. **Cache-Aside**
-   - Veri isteğe bağlı olarak önbelleğe alınır
-   - Uygulama önbelleği yönetir
-   - Esnek ve kontrol edilebilir
+**Öğrenilecekler:**
+- Redis connection management
+- Redis data types
+- Redis clustering
+- Redis persistence
+- Redis performance tuning
 
-2. **Read-Through**
-   - Önbellek veritabanından okur
-   - Uygulama önbelleğe erişir
-   - Şeffaf ve basit
+## Neden Önemli?
 
-3. **Write-Through**
-   - Veri hem önbelleğe hem veritabanına yazılır
-   - Veri tutarlılığı sağlar
-   - Performans maliyeti vardır
+### 1. **Performance Improvement**
+- Response time reduction
+- Database load reduction
+- Network latency mitigation
+- Resource utilization optimization
 
-4. **Write-Behind**
-   - Veri önce önbelleğe yazılır
-   - Veritabanına asenkron yazılır
-   - Yüksek performans sağlar
+### 2. **Scalability**
+- Horizontal scaling support
+- Load distribution
+- Resource sharing
+- Capacity planning
 
-## Caching Best Practices
+### 3. **User Experience**
+- Faster page loads
+- Responsive applications
+- Reduced waiting times
+- Better user satisfaction
 
-1. **Cache Key Tasarımı**
-   - Anlamlı ve tutarlı isimlendirme
-   - Versiyonlama
-   - Namespace kullanımı
-
-2. **Cache Invalidation**
-   - Zaman tabanlı
-   - Olay tabanlı
-   - Manuel invalidation
-
-3. **Cache Size Yönetimi**
-   - Memory limitleri
-   - Eviction politikaları
-   - Monitoring
-
-4. **Error Handling**
-   - Fallback mekanizmaları
-   - Circuit breaker
-   - Retry politikaları
+### 4. **Cost Optimization**
+- Infrastructure cost reduction
+- Database licensing optimization
+- Network bandwidth savings
+- Resource efficiency
 
 ## Mülakat Soruları
 
 ### Temel Sorular
 
-1. **Caching nedir ve neden önemlidir?**
-   - **Cevap**: Caching, sık kullanılan verilerin geçici olarak saklanması işlemidir. Performans iyileştirmesi, ölçeklenebilirlik ve maliyet optimizasyonu sağlar.
+1. **Caching nedir ve neden kullanılır?**
+   - **Cevap**: Data storage optimization, performance improvement, resource utilization.
 
-2. **In-Memory ve Distributed Caching arasındaki farklar nelerdir?**
-   - **Cevap**:
-     - In-Memory: Tek sunucuda, hızlı, uygulama içi
-     - Distributed: Birden fazla sunucuda, ölçeklenebilir, paylaşımlı
+2. **In-memory vs distributed caching farkı nedir?**
+   - **Cevap**: Memory scope, scalability, consistency, performance characteristics.
 
-3. **Cache invalidation stratejileri nelerdir?**
-   - **Cevap**:
-     - Zaman tabanlı (TTL)
-     - Olay tabanlı
-     - Manuel invalidation
-     - Dependency-based
+3. **Cache invalidation nasıl yapılır?**
+   - **Cevap**: Time-based, event-based, dependency-based, manual invalidation.
 
-4. **Cache-aside pattern nedir?**
-   - **Cevap**:
-     - Veri isteğe bağlı önbelleğe alınır
-     - Uygulama önbelleği yönetir
-     - Esnek ve kontrol edilebilir
-     - Yaygın kullanılan pattern
+4. **Cache patterns nelerdir?**
+   - **Cevap**: Cache-Aside, Write-Through, Write-Behind, Refresh-Ahead.
 
-5. **Cache coherency nedir?**
-   - **Cevap**:
-     - Önbellek tutarlılığı
-     - Veri senkronizasyonu
-     - Stale data önleme
-     - Consistency modelleri
+5. **Redis nedir ve ne için kullanılır?**
+   - **Cevap**: In-memory data structure store, caching, session storage, message broker.
 
 ### Teknik Sorular
 
-1. **MemoryCache kullanımı nasıl yapılır?**
-   - **Cevap**:
-```csharp
-public class CacheService
-{
-    private readonly IMemoryCache _cache;
-    private readonly MemoryCacheEntryOptions _options;
+1. **Cache hit ratio nasıl optimize edilir?**
+   - **Cevap**: Proper key design, cache size optimization, eviction policies.
 
-    public CacheService(IMemoryCache cache)
-    {
-        _cache = cache;
-        _options = new MemoryCacheEntryOptions()
-            .SetSlidingExpiration(TimeSpan.FromMinutes(30))
-            .SetAbsoluteExpiration(TimeSpan.FromHours(1));
-    }
+2. **Distributed cache consistency nasıl sağlanır?**
+   - **Cevap**: Cache synchronization, invalidation strategies, consistency models.
 
-    public T GetOrCreate<T>(string key, Func<T> factory)
-    {
-        return _cache.GetOrCreate(key, entry =>
-        {
-            entry.SetOptions(_options);
-            return factory();
-        });
-    }
-}
-```
+3. **Cache memory pressure nasıl handle edilir?**
+   - **Cevap**: Eviction policies, memory limits, cache size management.
 
-2. **Distributed Cache kullanımı nasıl yapılır?**
-   - **Cevap**:
-```csharp
-public class DistributedCacheService
-{
-    private readonly IDistributedCache _cache;
-    private readonly DistributedCacheEntryOptions _options;
+4. **Redis clustering nasıl implement edilir?**
+   - **Cevap**: Master-slave replication, sharding, failover strategies.
 
-    public DistributedCacheService(IDistributedCache cache)
-    {
-        _cache = cache;
-        _options = new DistributedCacheEntryOptions
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1),
-            SlidingExpiration = TimeSpan.FromMinutes(30)
-        };
-    }
+5. **Cache warming nasıl yapılır?**
+   - **Cevap**: Pre-loading strategies, background processes, startup optimization.
 
-    public async Task<T> GetOrCreateAsync<T>(string key, Func<Task<T>> factory)
-    {
-        var cached = await _cache.GetAsync(key);
-        if (cached != null)
-        {
-            return JsonSerializer.Deserialize<T>(cached);
-        }
+## Best Practices
 
-        var result = await factory();
-        await _cache.SetAsync(key, JsonSerializer.SerializeToUtf8Bytes(result), _options);
-        return result;
-    }
-}
-```
+### 1. **Cache Design**
+- Design appropriate cache keys
+- Implement proper expiration policies
+- Use appropriate cache sizes
+- Plan cache eviction strategies
+- Monitor cache performance
 
-3. **Cache invalidation nasıl yapılır?**
-   - **Cevap**:
-```csharp
-public class CacheInvalidator
-{
-    private readonly IMemoryCache _cache;
-    private readonly ILogger<CacheInvalidator> _logger;
+### 2. **Cache Invalidation**
+- Implement proper invalidation strategies
+- Use event-based invalidation
+- Handle cache dependencies
+- Implement cache warming
+- Monitor cache coherence
 
-    public CacheInvalidator(IMemoryCache cache, ILogger<CacheInvalidator> logger)
-    {
-        _cache = cache;
-        _logger = logger;
-    }
+### 3. **Performance Optimization**
+- Optimize cache hit ratios
+- Minimize cache misses
+- Use appropriate serialization
+- Implement cache compression
+- Monitor cache latency
 
-    public void Invalidate(string key)
-    {
-        _cache.Remove(key);
-        _logger.LogInformation("Cache invalidated for key: {Key}", key);
-    }
+### 4. **Scalability**
+- Plan for horizontal scaling
+- Implement cache partitioning
+- Use appropriate cache topologies
+- Handle cache synchronization
+- Plan for failover scenarios
 
-    public void InvalidateByPattern(string pattern)
-    {
-        var keys = GetKeysByPattern(pattern);
-        foreach (var key in keys)
-        {
-            Invalidate(key);
-        }
-    }
-}
-```
+### 5. **Monitoring & Maintenance**
+- Monitor cache performance
+- Track cache hit ratios
+- Monitor memory usage
+- Implement cache health checks
+- Plan cache maintenance
 
-4. **Cache monitoring nasıl yapılır?**
-   - **Cevap**:
-```csharp
-public class CacheMonitor
-{
-    private readonly IMemoryCache _cache;
-    private readonly ILogger<CacheMonitor> _logger;
+## Kaynaklar
 
-    public CacheMonitor(IMemoryCache cache, ILogger<CacheMonitor> logger)
-    {
-        _cache = cache;
-        _logger = logger;
-    }
-
-    public void LogCacheStatistics()
-    {
-        var stats = new
-        {
-            HitCount = _cache.GetCurrentStatistics()?.TotalHits ?? 0,
-            MissCount = _cache.GetCurrentStatistics()?.TotalMisses ?? 0,
-            CurrentSize = _cache.GetCurrentStatistics()?.CurrentEntryCount ?? 0
-        };
-
-        _logger.LogInformation("Cache Statistics: {@Stats}", stats);
-    }
-}
-```
-
-5. **Cache fallback stratejisi nasıl uygulanır?**
-   - **Cevap**:
-```csharp
-public class CacheWithFallback
-{
-    private readonly IMemoryCache _cache;
-    private readonly ILogger<CacheWithFallback> _logger;
-
-    public CacheWithFallback(IMemoryCache cache, ILogger<CacheWithFallback> logger)
-    {
-        _cache = cache;
-        _logger = logger;
-    }
-
-    public async Task<T> GetWithFallback<T>(string key, Func<Task<T>> factory, TimeSpan cacheDuration)
-    {
-        try
-        {
-            if (_cache.TryGetValue(key, out T cachedValue))
-            {
-                return cachedValue;
-            }
-
-            var value = await factory();
-            _cache.Set(key, value, cacheDuration);
-            return value;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Cache operation failed for key: {Key}", key);
-            return await factory();
-        }
-    }
-}
-```
-
-### İleri Seviye Sorular
-
-1. **Cache coherency sorunları nasıl çözülür?**
-   - **Cevap**:
-     - Strong consistency modelleri
-     - Eventual consistency
-     - Versioning
-     - Distributed locking
-     - Cache synchronization
-
-2. **Cache warming stratejileri nelerdir?**
-   - **Cevap**:
-     - Startup warming
-     - Background warming
-     - Predictive warming
-     - Scheduled warming
-     - On-demand warming
-
-3. **Cache partitioning nasıl yapılır?**
-   - **Cevap**:
-     - Key-based partitioning
-     - Hash-based partitioning
-     - Range partitioning
-     - Directory partitioning
-     - Consistent hashing
-
-4. **Cache monitoring ve alerting nasıl yapılır?**
-   - **Cevap**:
-     - Performance metrics
-     - Hit/miss ratios
-     - Memory usage
-     - Latency monitoring
-     - Custom alerts
-
-5. **Cache security nasıl sağlanır?**
-   - **Cevap**:
-     - Encryption
-     - Access control
-     - Data isolation
-     - Secure communication
-     - Audit logging 
+- [ASP.NET Core Caching](https://docs.microsoft.com/en-us/aspnet/core/performance/caching/)
+- [Distributed Caching](https://docs.microsoft.com/en-us/aspnet/core/performance/caching/distributed)
+- [Redis Documentation](https://redis.io/documentation)
+- [Cache Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/cache-aside)
+- [Performance Best Practices](https://docs.microsoft.com/en-us/azure/architecture/best-practices/caching)
+- [.NET Caching](https://docs.microsoft.com/en-us/dotnet/core/extensions/caching) 

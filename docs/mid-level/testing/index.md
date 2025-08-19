@@ -1,80 +1,175 @@
-# Test Genel Bakış
+# Test
 
 ## Giriş
 
-Test, yazılım geliştirme sürecinin kritik bir parçasıdır ve kaliteli, güvenilir ve sürdürülebilir yazılımlar üretmek için vazgeçilmezdir. Mid-Level Developer olarak, test kavramlarını ve uygulamalarını iyi anlamak, yazılım kalitesini artırmak ve hataları erken aşamada tespit etmek için önemlidir.
+Testing, modern .NET uygulamalarında code quality, reliability ve maintainability için kritik öneme sahiptir. Mid-level geliştiriciler için comprehensive testing strategies, test-driven development (TDD), mocking, integration testing ve test coverage konularında uzmanlaşmak, production-ready uygulamalar geliştirmek için gereklidir. Bu bölüm, unit testing, TDD, mocking, integration testing, test coverage ve testing best practices konularını kapsar.
 
-## Test Türleri ve Yaklaşımlar
+## Kapsanan Konular
 
 ### 1. Unit Testing
-Unit testing, yazılımın en küçük parçalarının (fonksiyonlar, metodlar) bağımsız olarak test edilmesidir. Bu testler:
-- Hızlı çalışır
-- Bağımlılıklardan izole edilmiştir
-- Tekrarlanabilirdir
-- Kodun doğru çalıştığını doğrular
+Unit test yazımı, test frameworks, ve unit testing best practices.
+
+**Öğrenilecekler:**
+- Unit test principles
+- Test frameworks (xUnit, NUnit, MSTest)
+- Test organization
+- Test naming conventions
+- Test isolation
 
 ### 2. Test Driven Development (TDD)
-TDD, geleneksel geliştirme yaklaşımının tersine çevrilmiş halidir:
-- Önce test yazılır
-- Sonra minimum kod yazılır
-- Kod refactor edilir
-- Sürekli geri bildirim sağlar
+TDD cycle, red-green-refactor, ve TDD best practices.
 
-### 3. Integration Testing
-Entegrasyon testleri, farklı sistem bileşenlerinin birlikte çalışmasını test eder:
-- Sistem entegrasyonlarını doğrular
-- Veritabanı entegrasyonlarını test eder
-- API entegrasyonlarını kontrol eder
-- Servis entegrasyonlarını doğrular
+**Öğrenilecekler:**
+- TDD cycle
+- Red-Green-Refactor
+- Test-first development
+- Behavior-driven development
+- TDD benefits
 
-### 4. Mocking
-Mocking, test sürecinde bağımlılıkları simüle etmek için kullanılır:
-- Harici servisleri taklit eder
-- Test ortamını kontrol eder
-- Test sürecini hızlandırır
-- Bağımlılıkları izole eder
+### 3. Mocking
+Mock objects, test doubles, ve mocking frameworks.
+
+**Öğrenilecekler:**
+- Mock vs Stub vs Fake
+- Mocking frameworks (Moq, NSubstitute)
+- Mock verification
+- Mock setup
+- Mock best practices
+
+### 4. Integration Testing
+Integration test yazımı, test databases, ve integration testing strategies.
+
+**Öğrenilecekler:**
+- Integration test setup
+- Test database management
+- External service testing
+- API testing
+- End-to-end testing
 
 ### 5. Test Coverage
-Test coverage, kodun ne kadarının test edildiğini ölçer:
-- Kod kapsama oranını takip eder
-- Test edilmemiş alanları belirler
-- Test stratejisini yönlendirir
-- Kalite göstergesi sağlar
+Code coverage measurement, coverage analysis, ve coverage improvement.
 
-## Test Araçları ve Framework'ler
+**Öğrenilecekler:**
+- Coverage metrics
+- Coverage tools
+- Coverage analysis
+- Coverage improvement
+- Coverage goals
 
-### .NET Test Framework'leri
-- **xUnit**: Modern ve esnek test framework'ü
-- **NUnit**: Kapsamlı test özellikleri sunan framework
-- **MSTest**: Microsoft'un resmi test framework'ü
+### 6. Testing Best Practices
+Testing strategies, test maintenance, ve testing automation.
 
-### Mocking Framework'leri
-- **Moq**: Popüler ve kullanımı kolay mocking framework
-- **NSubstitute**: Fluent API ile kullanımı kolay framework
-- **FakeItEasy**: Basit ve güçlü mocking framework
+**Öğrenilecekler:**
+- Test organization
+- Test maintenance
+- Test automation
+- CI/CD integration
+- Testing metrics
 
-## Test Best Practices
+## Neden Önemli?
 
-1. **Test İsimlendirme**
-   - Given-When-Then formatı kullanımı
-   - Açıklayıcı ve anlamlı isimler
-   - Test amacını yansıtan isimler
+### 1. **Code Quality**
+- Bug prevention
+- Code reliability
+- Maintainability
+- Refactoring confidence
 
-2. **Test Organizasyonu**
-   - Arrange-Act-Assert (AAA) pattern
-   - Test sınıflarının mantıklı organizasyonu
-   - Test kategorilerinin doğru kullanımı
+### 2. **Development Efficiency**
+- Faster development cycles
+- Reduced debugging time
+- Better design decisions
+- Documentation through tests
 
-3. **Test Bağımsızlığı**
-   - Testlerin birbirinden bağımsız olması
-   - Test sırasının önemsiz olması
-   - Test verilerinin izolasyonu
+### 3. **Business Confidence**
+- Reduced production bugs
+- Faster feature delivery
+- Better user experience
+- Cost reduction
 
-4. **Test Otomasyonu**
-   - CI/CD pipeline entegrasyonu
-   - Test raporlama ve analiz
-   - Performans testleri
+### 4. **Team Collaboration**
+- Shared understanding
+- Code review support
+- Knowledge transfer
+- Onboarding support
 
-## Sonuç
+## Mülakat Soruları
 
-Test, yazılım geliştirme sürecinin ayrılmaz bir parçasıdır. Mid-Level Developer olarak, farklı test türlerini anlamak ve uygulamak, yazılım kalitesini artırmak ve hataları erken aşamada tespit etmek için kritik öneme sahiptir. Bu rehberde, test kavramlarını ve uygulamalarını detaylı olarak inceleyeceğiz. 
+### Temel Sorular
+
+1. **Unit test nedir?**
+   - **Cevap**: Individual unit testing, isolated testing, fast execution, reliable results.
+
+2. **TDD nedir?**
+   - **Cevap**: Test-first development, red-green-refactor cycle, behavior specification.
+
+3. **Mock nedir?**
+   - **Cevap**: Test double, simulated behavior, dependency isolation, controlled testing.
+
+4. **Integration test nedir?**
+   - **Cevap**: Component interaction testing, external dependency testing, system testing.
+
+5. **Test coverage nedir?**
+   - **Cevap**: Code execution measurement, coverage metrics, quality indicator.
+
+### Teknik Sorular
+
+1. **Unit test nasıl yazılır?**
+   - **Cevap**: Arrange-Act-Assert pattern, test isolation, dependency injection.
+
+2. **TDD cycle nasıl çalışır?**
+   - **Cevap**: Write failing test, write code, refactor, repeat.
+
+3. **Mock object nasıl oluşturulur?**
+   - **Cevap**: Mock framework usage, behavior setup, verification.
+
+4. **Integration test nasıl yazılır?**
+   - **Cevap**: Test environment setup, external dependency management.
+
+5. **Test coverage nasıl ölçülür?**
+   - **Cevap**: Coverage tools, metrics analysis, improvement strategies.
+
+## Best Practices
+
+### 1. **Test Design**
+- Follow AAA pattern
+- Write readable tests
+- Use descriptive names
+- Keep tests simple
+- Test one thing at a time
+
+### 2. **Test Organization**
+- Organize by feature
+- Use consistent naming
+- Group related tests
+- Maintain test structure
+- Plan for scalability
+
+### 3. **Test Maintenance**
+- Keep tests up to date
+- Refactor tests regularly
+- Remove obsolete tests
+- Monitor test performance
+- Plan for test evolution
+
+### 4. **Test Automation**
+- Automate test execution
+- Integrate with CI/CD
+- Monitor test results
+- Track test metrics
+- Plan for continuous improvement
+
+### 5. **Test Quality**
+- Write meaningful tests
+- Avoid test smells
+- Use appropriate assertions
+- Handle edge cases
+- Plan for test coverage
+
+## Kaynaklar
+
+- [Unit Testing](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test)
+- [Test Driven Development](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#testability)
+- [Mocking in .NET](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test#mocking)
+- [Integration Testing](https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests)
+- [Test Coverage](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-code-coverage)
+- [Testing Best Practices](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#testing) 

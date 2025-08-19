@@ -113,7 +113,7 @@ nav:
       - Genel Bakış: junior/security-basics/index.md
       - Authentication: junior/security-basics/authentication.md
       - Authorization: junior/security-basics/authorization.md
-      - HTTPS: junior/security-basics/https.md
+
       - CORS: junior/security-basics/cors.md
       - Input Validation: junior/security-basics/input-validation.md
     - Mülakat Örnekleri:
@@ -122,6 +122,18 @@ nav:
       - Mülakat Örneği 3: junior/interview-examples/interview-3.md
       - Mülakat Örneği 4: junior/interview-examples/interview-4.md
       - Mülakat Örneği 5: junior/interview-examples/interview-5.md
+    - Web Development Basics:
+      - Genel Bakış: junior/web-development/index.md
+      - HTML & CSS Basics: junior/web-development/html-css-basics.md
+      - JavaScript Basics: junior/web-development/javascript-basics.md
+      - HTTP Fundamentals: junior/web-development/http-fundamentals.md
+      - Web Security Basics: junior/web-development/web-security-basics.md
+    - Development Tools:
+      - Genel Bakış: junior/development-tools/index.md
+      - Visual Studio: junior/development-tools/visual-studio.md
+      - Git Basics: junior/development-tools/git-basics.md
+      - Debugging: junior/development-tools/debugging.md
+      - Unit Testing Basics: junior/development-tools/unit-testing-basics.md
   - Mid-Level Developer:
     - İleri C# Konuları:
       - Genel Bakış: mid-level/advanced-csharp/index.md
@@ -220,6 +232,51 @@ nav:
       - Distributed Locking: mid-level/architecture/distributed-locking.md
     - Mülakat Örnekleri:
       - Mülakat Örneği 1: mid-level/interview-examples/interview-1.md
+    - API Design & Development:
+      - Genel Bakış: mid-level/api-design/index.md
+      - GraphQL: mid-level/api-design/graphql.md
+      - API Rate Limiting: mid-level/api-design/rate-limiting.md
+      - API Authentication Patterns: mid-level/api-design/authentication-patterns.md
+      - API Testing: mid-level/api-design/testing.md
+    - Database & Data Management:
+      - Database Design Patterns: mid-level/database-design/design-patterns.md
+      - Database Migration Strategies: mid-level/database-design/migration-strategies.md
+      - Database Sharding: mid-level/database-design/sharding.md
+      - Database Replication: mid-level/database-design/replication.md
+      - Data Validation & Sanitization: mid-level/database-design/validation-sanitization.md
+    - Security & Authentication:
+      - Genel Bakış: mid-level/security/index.md
+      - Identity & Access Management: mid-level/security/identity-access-management.md
+      - JWT Implementation: mid-level/security/jwt-implementation.md
+      - OAuth 2.0 Integration: mid-level/security/oauth2-integration.md
+      - API Security: mid-level/security/api-security.md
+      - Data Encryption: mid-level/security/data-encryption.md
+    - DevOps & Deployment:
+      - Docker & Containerization: mid-level/devops/docker-containerization.md
+      - CI/CD Pipelines: mid-level/devops/ci-cd-pipelines.md
+      - Environment Management: mid-level/devops/environment-management.md
+      - Health Checks: mid-level/devops/health-checks.md
+      - Deployment Strategies: mid-level/devops/deployment-strategies.md
+    - Advanced .NET Concepts:
+      - Source Generators: mid-level/advanced-dotnet/source-generators.md
+      - Memory Management: mid-level/advanced-dotnet/memory-management.md
+      - High Performance: mid-level/advanced-dotnet/high-performance.md
+      - Native Interop: mid-level/advanced-dotnet/native-interop.md
+      - Assembly Loading: mid-level/advanced-dotnet/assembly-loading.md
+    - Monitoring & Observability:
+      - Distributed Tracing: mid-level/monitoring/distributed-tracing.md
+      - Metrics Collection: mid-level/monitoring/metrics-collection.md
+      - Log Aggregation: mid-level/monitoring/log-aggregation.md
+      - Alerting: mid-level/monitoring/alerting.md
+      - Dashboard Creation: mid-level/monitoring/dashboard-creation.md
+    - Testing Strategies:
+      - Contract Testing: mid-level/testing-strategies/contract-testing.md
+      - Property-Based Testing: mid-level/testing-strategies/property-based-testing.md
+      - Performance Testing: mid-level/testing-strategies/performance-testing.md
+      - Security Testing: mid-level/testing-strategies/security-testing.md
+      - Chaos Engineering: mid-level/testing-strategies/chaos-engineering.md
+    - Architecture Patterns:
+      - Genel Bakış: mid-level/architecture-patterns/index.md
   - Senior Developer:
     - System Design:
       - Genel Bakış: senior/system-design/index.md
@@ -251,3 +308,20 @@ nav:
       - Penetration Testing: senior/advanced-security/penetration-testing.md
     - Mülakat Örnekleri:
       - Mülakat Örneği 1: senior/interview-examples/interview-1.md
+    - Advanced System Design:
+      - Genel Bakış: senior/advanced-system-design/index.md
+
+    - Cloud-Native Architecture:
+      - Genel Bakış: senior/cloud-native/index.md
+
+    - Advanced DevOps:
+      - Genel Bakış: senior/advanced-devops/index.md
+
+    - Performance Engineering:
+      - Genel Bakış: senior/performance-engineering/index.md
+
+    - Data Engineering:
+      - Genel Bakış: senior/data-engineering/index.md
+
+    - Team Leadership:
+      - Genel Bakış: senior/team-leadership/index.md

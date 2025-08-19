@@ -1,302 +1,265 @@
-# Entity Framework - Genel Bakış
+# Entity Framework
 
 ## Giriş
 
-Entity Framework (EF), .NET uygulamalarında veritabanı işlemlerini gerçekleştirmek için kullanılan bir ORM (Object-Relational Mapping) framework'üdür. Mid-level geliştiriciler için EF'in ileri seviye özellikleri ve kullanım senaryoları önemlidir.
+Entity Framework, .NET ekosisteminde object-relational mapping (ORM) sağlayan güçlü bir framework'tir. Mid-level geliştiriciler için Entity Framework'ün advanced özelliklerini anlamak, performanslı ve ölçeklenebilir veritabanı uygulamaları geliştirmek için kritik öneme sahiptir. Bu bölüm, performance optimization, advanced querying, change tracking, bulk operations, concurrency, raw SQL, interceptors, value objects, complex types, shadow properties, global query filters, database functions, custom migrations ve multiple databases konularını kapsar.
 
-## Mid-Level Entity Framework Konuları
+## Kapsanan Konular
 
-1. **Performance Optimization**
-   - Query optimizasyonu
-   - Change tracking optimizasyonu
-   - Bulk operasyonlar
-   - Caching stratejileri
-   - Index yönetimi
+### 1. Performance Optimization
+Entity Framework'te performans optimizasyonu teknikleri, query optimization, lazy loading vs eager loading, ve memory management.
 
-2. **Advanced Querying**
-   - LINQ to Entities
-   - Raw SQL queries
-   - Stored procedures
-   - Database functions
-   - Complex queries
+**Öğrenilecekler:**
+- Query optimization strategies
+- Lazy vs Eager loading
+- Memory usage optimization
+- Connection pooling
+- Query plan analysis
 
-3. **Change Tracking**
-   - Entity states
-   - Change tracking strategies
-   - Bulk updates
-   - Concurrency control
-   - Audit logging
+### 2. Advanced Querying
+Complex LINQ queries, raw SQL integration, stored procedures, ve custom query methods.
 
-4. **Bulk Operations**
-   - Bulk insert
-   - Bulk update
-   - Bulk delete
-   - Batch processing
-   - Performance optimization
+**Öğrenilecekler:**
+- Complex LINQ operations
+- Raw SQL execution
+- Stored procedure calls
+- Dynamic query building
+- Query composition
 
-5. **Concurrency**
-   - Optimistic concurrency
-   - Pessimistic concurrency
-   - Concurrency tokens
-   - Conflict resolution
-   - Retry strategies
+### 3. Change Tracking
+Entity state management, change detection, ve change tracking optimization.
 
-6. **Raw SQL**
-   - SQL injection önleme
-   - Parametre kullanımı
-   - Stored procedure çağrıları
-   - View kullanımı
-   - Custom SQL
+**Öğrenilecekler:**
+- Entity states (Added, Modified, Deleted, Unchanged)
+- Change tracking strategies
+- Performance optimization
+- Bulk change operations
+- Change notification
 
-7. **Interceptors**
-   - Command interception
-   - Connection interception
-   - Transaction interception
-   - Custom interception
-   - Logging ve auditing
+### 4. Bulk Operations
+Large dataset operations, batch processing, ve bulk insert/update/delete operations.
 
-8. **Value Objects**
-   - Value object tanımlama
-   - Owned entity types
-   - Value conversion
-   - Query optimization
-   - Immutability
+**Öğrenilecekler:**
+- Bulk insert strategies
+- Batch processing
+- Performance optimization
+- Memory management
+- Transaction handling
 
-9. **Complex Types**
-   - Complex type tanımlama
-   - Value conversion
-   - Query optimization
-   - Mapping stratejileri
-   - Validation
+### 5. Concurrency
+Optimistic ve pessimistic concurrency control, conflict resolution, ve concurrency handling.
 
-10. **Shadow Properties**
-    - Shadow property tanımlama
-    - Audit fields
-    - Soft delete
-    - Tenant isolation
-    - Security
+**Öğrenilecekler:**
+- Optimistic concurrency
+- Pessimistic concurrency
+- Conflict detection
+- Resolution strategies
+- Performance implications
 
-11. **Global Query Filters**
-    - Filter tanımlama
-    - Multi-tenant uygulamalar
-    - Soft delete
-    - Security filters
-    - Performance optimization
+### 6. Raw SQL
+Native SQL execution, parameterized queries, ve SQL injection prevention.
 
-12. **Database Functions**
-    - Built-in functions
-    - Custom functions
-    - Scalar functions
-    - Table-valued functions
-    - Performance considerations
+**Öğrenilecekler:**
+- FromSqlRaw usage
+- ExecuteSqlRaw
+- Parameter handling
+- Security considerations
+- Performance benefits
 
-13. **Custom Migrations**
-    - Migration oluşturma
-    - Custom SQL
-    - Data seeding
-    - Version control
-    - Rollback stratejileri
+### 7. Interceptors
+Query interception, modification, ve custom behavior injection.
 
-14. **Multiple Databases**
-    - Connection string yönetimi
-    - Context factory pattern
-    - Database provider seçimi
-    - Migration yönetimi
-    - Transaction yönetimi
+**Öğrenilecekler:**
+- Query interceptors
+- SaveChanges interceptors
+- Custom behavior injection
+- Logging and auditing
+- Performance monitoring
 
-15. **Distributed Transactions**
-    - TransactionScope kullanımı
-    - MSDTC yapılandırması
-    - Two-phase commit
-    - Error handling
-    - Retry mekanizmaları
+### 8. Value Objects
+Immutable value objects, complex types, ve domain modeling.
 
-## Entity Framework Best Practices
+**Öğrenilecekler:**
+- Value object design
+- Complex type mapping
+- Immutability patterns
+- Domain modeling
+- Performance considerations
 
-1. **Performans**
-   - Query optimizasyonu
-   - Change tracking stratejileri
-   - Bulk operasyonlar
-   - Caching
-   - Index yönetimi
+### 9. Complex Types
+Complex property mapping, nested objects, ve custom type handling.
 
-2. **Güvenlik**
-   - SQL injection önleme
-   - Parametre kullanımı
-   - Input validation
-   - Access control
-   - Audit logging
+**Öğrenilecekler:**
+- Complex type configuration
+- Nested object mapping
+- Custom type converters
+- Serialization handling
+- Performance optimization
 
-3. **Bakım**
-   - Code-first yaklaşımı
-   - Migration yönetimi
-   - Version control
-   - Documentation
-   - Testing
+### 10. Shadow Properties
+Database-only properties, computed columns, ve metadata management.
 
-4. **Monitoring**
-   - Query logging
-   - Performance metrics
-   - Error tracking
-   - Audit logging
-   - Health checks
+**Öğrenilecekler:**
+- Shadow property usage
+- Computed column mapping
+- Metadata management
+- Performance implications
+- Use case scenarios
+
+### 11. Global Query Filters
+Application-wide query filtering, soft delete, ve multi-tenancy support.
+
+**Öğrenilecekler:**
+- Global filter configuration
+- Soft delete implementation
+- Multi-tenancy support
+- Performance considerations
+- Filter management
+
+### 12. Database Functions
+Custom database functions, user-defined functions, ve function mapping.
+
+**Öğrenilecekler:**
+- Database function mapping
+- Custom function creation
+- Parameter handling
+- Return type mapping
+- Performance optimization
+
+### 13. Custom Migrations
+Advanced migration scenarios, custom migration logic, ve complex schema changes.
+
+**Öğrenilecekler:**
+- Custom migration classes
+- Complex schema changes
+- Data migration
+- Rollback strategies
+- Testing migrations
+
+### 14. Multiple Databases
+Multi-database scenarios, database switching, ve cross-database operations.
+
+**Öğrenilecekler:**
+- Multi-database configuration
+- Database switching
+- Cross-database queries
+- Transaction management
+- Performance considerations
+
+### 15. Distributed Transactions
+Cross-database transactions, distributed transaction coordination, ve consistency management.
+
+**Öğrenilecekler:**
+- Distributed transaction patterns
+- Two-phase commit
+- Saga pattern integration
+- Consistency guarantees
+- Performance implications
+
+## Neden Önemli?
+
+### 1. **Performance Critical Applications**
+- High-traffic web applications
+- Data-intensive systems
+- Real-time data processing
+- Enterprise applications
+
+### 2. **Scalability Requirements**
+- Large dataset handling
+- Multi-tenant architectures
+- Distributed systems
+- Cloud-native applications
+
+### 3. **Data Integrity**
+- Complex business rules
+- Audit trail requirements
+- Compliance requirements
+- Data consistency
+
+### 4. **Developer Productivity**
+- Rapid development
+- Code maintainability
+- Testing strategies
+- Deployment automation
 
 ## Mülakat Soruları
 
 ### Temel Sorular
 
-1. **Entity Framework nedir ve neden kullanılır?**
-   - **Cevap**: Entity Framework, .NET uygulamalarında veritabanı işlemlerini gerçekleştirmek için kullanılan bir ORM framework'üdür. Veritabanı işlemlerini nesne yönelimli bir şekilde yapmayı sağlar, kod tekrarını azaltır ve veritabanı bağımsızlığı sağlar.
+1. **Entity Framework'te N+1 problem nedir?**
+   - **Cevap**: Multiple database queries, Include statements, eager loading strategies.
 
-2. **Entity Framework'un temel özellikleri nelerdir?**
-   - **Cevap**:
-     - Object-Relational Mapping
-     - LINQ desteği
-     - Change tracking
-     - Migrations
-     - Concurrency control
-     - Transaction yönetimi
+2. **Change tracking nasıl çalışır?**
+   - **Cevap**: Entity state management, change detection, snapshot comparison.
 
-3. **Entity Framework'te Code-First ve Database-First yaklaşımları arasındaki farklar nelerdir?**
-   - **Cevap**: Code-First yaklaşımında önce entity sınıfları oluşturulur ve veritabanı bu sınıflardan türetilir. Database-First yaklaşımında ise önce veritabanı oluşturulur ve entity sınıfları veritabanından türetilir.
+3. **Bulk operations ne zaman kullanılır?**
+   - **Cevap**: Large datasets, performance requirements, batch processing.
 
-4. **Entity Framework'te lazy loading ve eager loading nedir?**
-   - **Cevap**: Lazy loading, ilişkili verilerin ihtiyaç duyulduğunda yüklenmesidir. Eager loading ise ilişkili verilerin ana sorgu ile birlikte yüklenmesidir.
+4. **Concurrency conflict nasıl çözülür?**
+   - **Cevap**: Optimistic concurrency, conflict detection, resolution strategies.
 
-5. **Entity Framework'te change tracking nedir?**
-   - **Cevap**: Change tracking, entity'lerdeki değişikliklerin takip edilmesi ve veritabanına yansıtılması sürecidir.
+5. **Raw SQL ne zaman kullanılır?**
+   - **Cevap**: Complex queries, performance requirements, stored procedures.
 
 ### Teknik Sorular
 
-1. **Entity Framework'te performans optimizasyonu nasıl yapılır?**
-   - **Cevap**:
-```csharp
-// Örnek: Eager loading
-var blog = await _context.Blogs
-    .Include(b => b.Posts)
-    .FirstOrDefaultAsync(b => b.Id == id);
+1. **Query performance nasıl optimize edilir?**
+   - **Cevap**: Indexing, query optimization, lazy loading, projection.
 
-// Örnek: Projection
-var blogTitles = await _context.Blogs
-    .Select(b => new { b.Id, b.Title })
-    .ToListAsync();
+2. **Global query filters nasıl implement edilir?**
+   - **Cevap**: HasQueryFilter, soft delete, multi-tenancy.
 
-// Örnek: Raw SQL
-var blogs = await _context.Blogs
-    .FromSqlRaw("SELECT * FROM Blogs WHERE Rating > {0}", 3)
-    .ToListAsync();
-```
+3. **Custom migrations nasıl oluşturulur?**
+   - **Cevap**: Migration class inheritance, custom logic, data migration.
 
-2. **Entity Framework'te transaction yönetimi nasıl yapılır?**
-   - **Cevap**:
-```csharp
-using (var transaction = await _context.Database.BeginTransactionAsync())
-{
-    try
-    {
-        // İşlemler
-        await _context.SaveChangesAsync();
-        await transaction.CommitAsync();
-    }
-    catch
-    {
-        await transaction.RollbackAsync();
-        throw;
-    }
-}
-```
+4. **Multiple databases nasıl yönetilir?**
+   - **Cevap**: DbContext configuration, connection strings, database switching.
 
-3. **Entity Framework'te concurrency kontrolü nasıl yapılır?**
-   - **Cevap**:
-```csharp
-public class Blog
-{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    [Timestamp]
-    public byte[] RowVersion { get; set; }
-}
+5. **Distributed transactions nasıl handle edilir?**
+   - **Cevap**: Two-phase commit, saga pattern, eventual consistency.
 
-// Güncelleme
-try
-{
-    _context.Entry(blog).OriginalValues["RowVersion"] = originalRowVersion;
-    await _context.SaveChangesAsync();
-}
-catch (DbUpdateConcurrencyException)
-{
-    // Concurrency çakışması
-}
-```
+## Best Practices
 
-4. **Entity Framework'te bulk operasyonlar nasıl yapılır?**
-   - **Cevap**:
-```csharp
-// Bulk insert
-await _context.BulkInsertAsync(entities);
+### 1. **Performance Optimization**
+- Use appropriate loading strategies
+- Implement query optimization
+- Monitor performance metrics
+- Use connection pooling
+- Implement caching strategies
 
-// Bulk update
-await _context.BulkUpdateAsync(entities);
+### 2. **Data Modeling**
+- Design efficient entity relationships
+- Use appropriate data types
+- Implement proper indexing
+- Consider denormalization
+- Plan for scalability
 
-// Bulk delete
-await _context.BulkDeleteAsync(entities);
-```
+### 3. **Query Management**
+- Use parameterized queries
+- Implement query caching
+- Monitor query performance
+- Use appropriate LINQ methods
+- Consider raw SQL when needed
 
-5. **Entity Framework'te custom migration nasıl oluşturulur?**
-   - **Cevap**:
-```csharp
-public partial class CustomMigration : Migration
-{
-    protected override void Up(MigrationBuilder migrationBuilder)
-    {
-        migrationBuilder.Sql("CREATE PROCEDURE ...");
-    }
+### 4. **Transaction Management**
+- Use appropriate transaction scope
+- Handle concurrency properly
+- Implement rollback strategies
+- Monitor transaction performance
+- Consider distributed transactions
 
-    protected override void Down(MigrationBuilder migrationBuilder)
-    {
-        migrationBuilder.Sql("DROP PROCEDURE ...");
-    }
-}
-```
+### 5. **Migration Strategy**
+- Plan migration sequences
+- Test migrations thoroughly
+- Implement rollback procedures
+- Monitor migration performance
+- Document schema changes
 
-### İleri Seviye Sorular
+## Kaynaklar
 
-1. **Entity Framework'te distributed transaction nasıl yönetilir?**
-   - **Cevap**:
-     - TransactionScope kullanımı
-     - MSDTC yapılandırması
-     - Two-phase commit
-     - Error handling
-     - Retry mekanizmaları
-
-2. **Entity Framework'te multiple database nasıl yönetilir?**
-   - **Cevap**:
-     - Connection string yönetimi
-     - Context factory pattern
-     - Database provider seçimi
-     - Migration yönetimi
-     - Transaction yönetimi
-
-3. **Entity Framework'te interceptors nasıl kullanılır?**
-   - **Cevap**:
-     - Command interception
-     - Connection interception
-     - Transaction interception
-     - Custom interception
-     - Logging ve auditing
-
-4. **Entity Framework'te value objects ve complex types nasıl kullanılır?**
-   - **Cevap**:
-     - Value object tanımlama
-     - Complex type tanımlama
-     - Owned entity types
-     - Value conversion
-     - Query optimization
-
-5. **Entity Framework'te global query filters nasıl kullanılır?**
-   - **Cevap**:
-     - Filter tanımlama
-     - Multi-tenant uygulamalar
-     - Soft delete
-     - Security filters
-     - Performance optimization 
+- [Entity Framework Core Documentation](https://docs.microsoft.com/en-us/ef/core/)
+- [EF Core Performance](https://docs.microsoft.com/en-us/ef/core/performance/)
+- [EF Core Concurrency](https://docs.microsoft.com/en-us/ef/core/saving/concurrency)
+- [EF Core Migrations](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/)
+- [EF Core Querying](https://docs.microsoft.com/en-us/ef/core/querying/)
+- [EF Core Change Tracking](https://docs.microsoft.com/en-us/ef/core/change-tracking/) 
