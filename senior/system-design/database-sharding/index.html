@@ -1,0 +1,7927 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content=".NET backend geliştiricileri için kapsamlı mülakat rehberi">
+      
+      
+        <meta name="author" content="Murat Dinc">
+      
+      
+      
+        <link rel="prev" href="../caching-strategies/">
+      
+      
+        <link rel="next" href="../../cloud-architecture/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Database Sharding - .NET Backend Mülakat Rehberi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#veritaban-sharding" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title=".NET Backend Mülakat Rehberi" class="md-header__button md-logo" aria-label=".NET Backend Mülakat Rehberi" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            .NET Backend Mülakat Rehberi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Database Sharding
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/MuratDincc/interview-topics-turkish" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Ana Sayfa
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../junior/basic-dotnet-concepts/" class="md-tabs__link">
+          
+  
+  Junior Developer
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../mid-level/advanced-csharp/" class="md-tabs__link">
+          
+  
+  Mid-Level Developer
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  Senior Developer
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title=".NET Backend Mülakat Rehberi" class="md-nav__button md-logo" aria-label=".NET Backend Mülakat Rehberi" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    .NET Backend Mülakat Rehberi
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/MuratDincc/interview-topics-turkish" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ana Sayfa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior Developer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Junior Developer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Temel .NET Kavramları
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Temel .NET Kavramları
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/basic-dotnet-concepts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/basic-dotnet-concepts/framework-vs-core/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    .NET Framework vs .NET Core
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/basic-dotnet-concepts/clr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CLR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/basic-dotnet-concepts/managed-unmanaged/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Managed ve Unmanaged Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/basic-dotnet-concepts/assembly-namespace/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assembly ve Namespace
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/basic-dotnet-concepts/garbage-collection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Garbage Collection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Algoritmalar
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Algoritmalar
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/algorithms/array-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Array Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/algorithms/string-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    String Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/algorithms/number-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Number Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/algorithms/dynamic-programming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dynamic Programming
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/algorithms/sorting-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sorting Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/algorithms/linked-list-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linked List Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/algorithms/tree-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tree Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/algorithms/hash-table-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hash Table Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    C# Temelleri
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            C# Temelleri
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/basic-data-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Temel Veri Tipleri
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/control-structures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Kontrol Yapıları
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/oop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nesne Yönelimli Programlama
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/collections/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Koleksiyonlar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/delegates-events/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Delegates ve Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/exception-handling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exception Handling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/string-operations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    String İşlemleri
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/datetime-operations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DateTime İşlemleri
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/file-stream-operations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    File ve Stream İşlemleri
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/threading-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Threading Temelleri
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/async-programming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Asenkron Programlama
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/extension-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extension Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/generics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/lambda-expressions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lambda Expressions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/linq-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LINQ Temelleri
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/nullable-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nullable Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/value-reference-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Value Types vs Reference Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/boxing-unboxing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Boxing ve Unboxing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/csharp-basics/memory-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Memory Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ASP.NET Core Temelleri
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            ASP.NET Core Temelleri
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/aspnet-core-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/aspnet-core-basics/middleware/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Middleware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/aspnet-core-basics/dependency-injection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dependency Injection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/aspnet-core-basics/routing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/aspnet-core-basics/model-binding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Model Binding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/aspnet-core-basics/validation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Veritabanı İşlemleri
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Veritabanı İşlemleri
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/database-operations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/database-operations/entity-framework-core/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity Framework Core
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/database-operations/linq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LINQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/database-operations/migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/database-operations/transactions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/database-operations/performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API Geliştirme
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            API Geliştirme
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/api-development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/api-development/rest-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/api-development/http-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HTTP Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/api-development/status-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Status Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/api-development/api-versioning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Versioning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/api-development/api-documentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Güvenlik Temelleri
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Güvenlik Temelleri
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/security-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/security-basics/authentication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/security-basics/authorization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authorization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/security-basics/cors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CORS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/security-basics/input-validation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Input Validation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mülakat Örnekleri
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            Mülakat Örnekleri
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/interview-examples/interview-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mülakat Örneği 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/interview-examples/interview-2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mülakat Örneği 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/interview-examples/interview-3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mülakat Örneği 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/interview-examples/interview-4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mülakat Örneği 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/interview-examples/interview-5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mülakat Örneği 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Web Development Basics
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            Web Development Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/web-development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/web-development/html-css-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HTML & CSS Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/web-development/javascript-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JavaScript Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/web-development/http-fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HTTP Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/web-development/web-security-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web Security Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Development Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            Development Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/development-tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/development-tools/visual-studio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Visual Studio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/development-tools/git-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/development-tools/debugging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Debugging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../junior/development-tools/unit-testing-basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unit Testing Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mid-Level Developer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Mid-Level Developer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    İleri C# Konuları
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            İleri C# Konuları
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-csharp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-csharp/async-await/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Async/Await
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-csharp/linq-advanced/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LINQ Advanced
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-csharp/reflection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reflection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-csharp/attributes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Attributes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-csharp/expression-trees/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expression Trees
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Entity Framework
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Entity Framework
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/performance-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Performance Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/advanced-querying/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Advanced Querying
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/change-tracking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Change Tracking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/bulk-operations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bulk Operations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/concurrency/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/raw-sql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Raw SQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/interceptors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interceptors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/value-objects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Value Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/complex-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Complex Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/shadow-properties/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shadow Properties
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/global-query-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Query Filters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/database-functions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Database Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/custom-migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Custom Migrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/multiple-databases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multiple Databases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/entity-framework/distributed-transactions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Distributed Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Caching Stratejileri
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Caching Stratejileri
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/caching/in-memory-caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    In-Memory Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/caching/distributed-caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Distributed Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/caching/cache-invalidation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cache Invalidation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/caching/cache-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cache Patterns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/caching/redis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis Kullanımı
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Logging ve Monitoring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Logging ve Monitoring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/logging-monitoring/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/logging-monitoring/serilog-elk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Serilog/ELK Stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/logging-monitoring/application-insights/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application Insights
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/logging-monitoring/opentelemetry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenTelemetry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/logging-monitoring/log-aggregation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log Aggregation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/logging-monitoring/performance-monitoring/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Performance Monitoring
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Asenkron İşlemler
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Asenkron İşlemler
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/async-operations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/async-operations/background-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/async-operations/hangfire/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hangfire
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/async-operations/quartz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quartz.NET
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/async-operations/tpl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Task Parallel Library
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/async-operations/reactive-programming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reactive Programming
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Message Queue
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Message Queue
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/message-queue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/message-queue/rabbitmq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/message-queue/kafka/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache Kafka
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Test
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Test
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing/unit-testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unit Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing/tdd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Driven Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing/mocking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mocking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing/integration-testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing/test-coverage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Coverage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing/testing-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing Best Practices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Design Patterns
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            Design Patterns
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/design-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/design-patterns/creational-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creational Patterns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/design-patterns/structural-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Structural Patterns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/design-patterns/behavioral-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Behavioral Patterns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/design-patterns/repository-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repository Pattern
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/design-patterns/unit-of-work/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unit of Work
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SOLID Prensipleri
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            SOLID Prensipleri
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/solid-principles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/solid-principles/single-responsibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Single Responsibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/solid-principles/open-closed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Open/Closed
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/solid-principles/liskov-substitution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Liskov Substitution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/solid-principles/interface-segregation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Segregation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/solid-principles/dependency-inversion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dependency Inversion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Clean Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            Clean Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/clean-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/clean-architecture/domain-layer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Domain Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/clean-architecture/application-layer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/clean-architecture/infrastructure-layer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/clean-architecture/presentation-layer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Presentation Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/clean-architecture/cross-cutting-concerns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cross-Cutting Concerns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Microservices
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            Microservices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/microservices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/microservices/service-communication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/microservices/api-gateway/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Gateway
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/microservices/service-discovery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service Discovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/microservices/circuit-breaker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Circuit Breaker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/microservices/event-sourcing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Event Sourcing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_12" id="__nav_3_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance Optimization
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_12">
+            <span class="md-nav__icon md-icon"></span>
+            Performance Optimization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/performance-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/performance-optimization/caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/performance-optimization/database-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Database Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/performance-optimization/memory-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Memory Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/performance-optimization/async-programming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Async Programming
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/performance-optimization/profiling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Profiling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_13" id="__nav_3_13_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mimari
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_13">
+            <span class="md-nav__icon md-icon"></span>
+            Mimari
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/architecture/distributed-locking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Distributed Locking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_14" id="__nav_3_14_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mülakat Örnekleri
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_14">
+            <span class="md-nav__icon md-icon"></span>
+            Mülakat Örnekleri
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/interview-examples/interview-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mülakat Örneği 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_15" id="__nav_3_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API Design & Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_15">
+            <span class="md-nav__icon md-icon"></span>
+            API Design & Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/api-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/api-design/graphql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/api-design/rate-limiting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Rate Limiting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/api-design/authentication-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Authentication Patterns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/api-design/testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_16" id="__nav_3_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Database & Data Management
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_16">
+            <span class="md-nav__icon md-icon"></span>
+            Database & Data Management
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/database-design/design-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Database Design Patterns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/database-design/migration-strategies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Database Migration Strategies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/database-design/sharding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Database Sharding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/database-design/replication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Database Replication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/database-design/validation-sanitization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Validation & Sanitization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_17" id="__nav_3_17_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Security & Authentication
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_17">
+            <span class="md-nav__icon md-icon"></span>
+            Security & Authentication
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/security/index.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/security/identity-access-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Identity & Access Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/security/jwt-implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JWT Implementation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/security/oauth2-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OAuth 2.0 Integration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/security/api-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/security/data-encryption/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Encryption
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_18" id="__nav_3_18_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DevOps & Deployment
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_18">
+            <span class="md-nav__icon md-icon"></span>
+            DevOps & Deployment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/devops/docker-containerization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker & Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/devops/ci-cd-pipelines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CI/CD Pipelines
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/devops/environment-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environment Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/devops/health-checks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Health Checks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/devops/deployment-strategies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment Strategies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_19" id="__nav_3_19_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Advanced .NET Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_19">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced .NET Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-dotnet/source-generators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Source Generators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-dotnet/memory-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Memory Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-dotnet/high-performance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    High Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-dotnet/native-interop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Native Interop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/advanced-dotnet/assembly-loading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assembly Loading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_20" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_20" id="__nav_3_20_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Monitoring & Observability
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_20">
+            <span class="md-nav__icon md-icon"></span>
+            Monitoring & Observability
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/monitoring/distributed-tracing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Distributed Tracing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/monitoring/metrics-collection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Metrics Collection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/monitoring/log-aggregation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log Aggregation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/monitoring/alerting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Alerting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/monitoring/dashboard-creation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dashboard Creation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_21" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_21" id="__nav_3_21_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Testing Strategies
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_21_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_21">
+            <span class="md-nav__icon md-icon"></span>
+            Testing Strategies
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing-strategies/contract-testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contract Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing-strategies/property-based-testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Property-Based Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing-strategies/performance-testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Performance Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing-strategies/security-testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/testing-strategies/chaos-engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chaos Engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_22" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_22" id="__nav_3_22_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture Patterns
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_22_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_22">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture Patterns
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mid-level/architecture-patterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Senior Developer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Senior Developer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    System Design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            System Design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scalability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scalability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../high-availability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    High Availability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../load-balancing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Load Balancing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../caching-strategies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Caching Strategies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Database Sharding
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Database Sharding
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#genel-baks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Genel Bakış
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#temel-kavramlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Temel Kavramlar
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Temel Kavramlar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hash-based-sharding" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Hash-Based Sharding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-range-based-sharding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Range-Based Sharding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-directory-based-sharding" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Directory-Based Sharding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-shard-rebalancing" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Shard Rebalancing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-sharding-stratejileri" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Sharding Stratejileri
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-performans-optimizasyonu" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Performans Optimizasyonu
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-monitoring-ve-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Monitoring ve Logging
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sk-sorulan-sorular" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sık Sorulan Sorular
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sık Sorulan Sorular">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hangi-sharding-stratejisi-ne-zaman-kullanlmaldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Hangi sharding stratejisi ne zaman kullanılmalıdır?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-shardingde-veri-tutarllg-nasl-saglanr" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Sharding'de veri tutarlılığı nasıl sağlanır?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-shardingde-karslaslan-zorluklar-nelerdir" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Sharding'de karşılaşılan zorluklar nelerdir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kaynaklar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kaynaklar
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Cloud Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cloud Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud-architecture/azure-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud-architecture/aws-services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud-architecture/containerization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud-architecture/serverless/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Serverless
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud-architecture/cloud-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cloud Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    DevOps Practices
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            DevOps Practices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-practices/ci-cd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CI/CD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-practices/infrastructure-as-code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure as Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-practices/monitoring/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Monitoring
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-practices/logging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Logging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops-practices/deployment-strategies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment Strategies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Advanced Security
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced Security
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-security/oauth2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OAuth2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-security/openid-connect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenID Connect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-security/jwt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JWT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-security/security-headers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Headers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-security/penetration-testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Penetration Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Mülakat Örnekleri
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Mülakat Örnekleri
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interview-examples/interview-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mülakat Örneği 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Advanced System Design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced System Design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-system-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Cloud-Native Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            Cloud-Native Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cloud-native/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Advanced DevOps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced DevOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-devops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Performance Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            Performance Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../performance-engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Data Engineering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            Data Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-engineering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Team Leadership
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            Team Leadership
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../team-leadership/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Genel Bakış
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/MuratDincc/interview-topics-turkish/edit/main/docs/senior/system-design/database-sharding.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="veritaban-sharding">Veritabanı Sharding<a class="headerlink" href="#veritaban-sharding" title="Permanent link">&para;</a></h1>
+<h2 id="genel-baks">Genel Bakış<a class="headerlink" href="#genel-baks" title="Permanent link">&para;</a></h2>
+<p>Veritabanı sharding, büyük veritabanlarını daha küçük, yönetilebilir parçalara (shard) bölerek ölçeklenebilirliği artıran bir tekniktir. Her shard, veritabanının bir alt kümesini içerir ve bağımsız olarak çalışabilir.</p>
+<h2 id="temel-kavramlar">Temel Kavramlar<a class="headerlink" href="#temel-kavramlar" title="Permanent link">&para;</a></h2>
+<h3 id="1-hash-based-sharding">1. Hash-Based Sharding<a class="headerlink" href="#1-hash-based-sharding" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">HashBasedShardingStrategy</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShardingStrategy</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">HashBasedShardingStrategy</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="n">IDatabase</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_shards</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">HashBasedShardingStrategy</span><span class="p">(</span>
+<span class="w">        </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">HashBasedShardingStrategy</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span>
+<span class="w">        </span><span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="n">IDatabase</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shards</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_shards</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shards</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IDatabase</span><span class="w"> </span><span class="nf">GetShard</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">key</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetHash</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">shardIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">_shards</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">_shards</span><span class="p">[</span><span class="n">shardIndex</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">GetHash</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">key</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="n">GetHashCode</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ShardedDatabaseService</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ShardedDatabaseService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IShardingStrategy</span><span class="w"> </span><span class="n">_shardingStrategy</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">ShardedDatabaseService</span><span class="p">(</span>
+<span class="w">        </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ShardedDatabaseService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span>
+<span class="w">        </span><span class="n">IShardingStrategy</span><span class="w"> </span><span class="n">shardingStrategy</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_shardingStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shardingStrategy</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">SaveDataAsync</span><span class="p">(</span><span class="n">Data</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">shard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_shardingStrategy</span><span class="p">.</span><span class="n">GetShard</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">shard</span><span class="p">.</span><span class="n">SaveAsync</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">Data</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetDataAsync</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">shard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_shardingStrategy</span><span class="p">.</span><span class="n">GetShard</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">shard</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="2-range-based-sharding">2. Range-Based Sharding<a class="headerlink" href="#2-range-based-sharding" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">RangeBasedShardingStrategy</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShardingStrategy</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">RangeBasedShardingStrategy</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="n">ShardRange</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_shardRanges</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">RangeBasedShardingStrategy</span><span class="p">(</span>
+<span class="w">        </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">RangeBasedShardingStrategy</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span>
+<span class="w">        </span><span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="n">ShardRange</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shardRanges</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_shardRanges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shardRanges</span><span class="p">.</span><span class="n">OrderBy</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">StartValue</span><span class="p">).</span><span class="n">ToList</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IDatabase</span><span class="w"> </span><span class="nf">GetShard</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">key</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNumericValue</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">shard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_shardRanges</span><span class="p">.</span><span class="n">FirstOrDefault</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span>
+<span class="w">            </span><span class="k">value</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">StartValue</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">EndValue</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">shard</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">ShardNotFoundException</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">shard</span><span class="p">.</span><span class="n">Database</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">GetNumericValue</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">key</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kt">long</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ShardRange</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">StartValue</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">EndValue</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IDatabase</span><span class="w"> </span><span class="n">Database</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">ShardRange</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">startValue</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">endValue</span><span class="p">,</span><span class="w"> </span><span class="n">IDatabase</span><span class="w"> </span><span class="n">database</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">StartValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">startValue</span><span class="p">;</span>
+<span class="w">        </span><span class="n">EndValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endValue</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Database</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">database</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="3-directory-based-sharding">3. Directory-Based Sharding<a class="headerlink" href="#3-directory-based-sharding" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DirectoryBasedShardingStrategy</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShardingStrategy</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">DirectoryBasedShardingStrategy</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IDictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">IDatabase</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_shardMap</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IDatabase</span><span class="w"> </span><span class="n">_defaultShard</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">DirectoryBasedShardingStrategy</span><span class="p">(</span>
+<span class="w">        </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">DirectoryBasedShardingStrategy</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span>
+<span class="w">        </span><span class="n">IDictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">IDatabase</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shardMap</span><span class="p">,</span>
+<span class="w">        </span><span class="n">IDatabase</span><span class="w"> </span><span class="n">defaultShard</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_shardMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shardMap</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_defaultShard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">defaultShard</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IDatabase</span><span class="w"> </span><span class="nf">GetShard</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">key</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_shardMap</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="kt">var</span><span class="w"> </span><span class="n">shard</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">shard</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&quot;Shard bulunamadı, varsayılan shard kullanılıyor: {key}&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">_defaultShard</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ShardDirectoryService</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ShardDirectoryService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IShardingStrategy</span><span class="w"> </span><span class="n">_shardingStrategy</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">ShardDirectoryService</span><span class="p">(</span>
+<span class="w">        </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ShardDirectoryService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span>
+<span class="w">        </span><span class="n">IShardingStrategy</span><span class="w"> </span><span class="n">shardingStrategy</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_shardingStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shardingStrategy</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">UpdateShardMappingAsync</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">IDatabase</span><span class="w"> </span><span class="n">newShard</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Shard mapping güncelleme işlemi</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="m">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// Simülasyon</span>
+<span class="w">        </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">$&quot;Shard mapping güncellendi: {key}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IDatabase</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetShardAsync</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">key</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">_shardingStrategy</span><span class="p">.</span><span class="n">GetShard</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="4-shard-rebalancing">4. Shard Rebalancing<a class="headerlink" href="#4-shard-rebalancing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ShardRebalancingService</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ShardRebalancingService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IShardingStrategy</span><span class="w"> </span><span class="n">_shardingStrategy</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="n">IDatabase</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_shards</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">ShardRebalancingService</span><span class="p">(</span>
+<span class="w">        </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ShardRebalancingService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span>
+<span class="w">        </span><span class="n">IShardingStrategy</span><span class="w"> </span><span class="n">shardingStrategy</span><span class="p">,</span>
+<span class="w">        </span><span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="n">IDatabase</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shards</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_shardingStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shardingStrategy</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_shards</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shards</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">RebalanceShardsAsync</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">shard</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">_shards</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">shard</span><span class="p">.</span><span class="n">GetAllDataAsync</span><span class="p">();</span>
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">targetShard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_shardingStrategy</span><span class="p">.</span><span class="n">GetShard</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">targetShard</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">shard</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">await</span><span class="w"> </span><span class="n">targetShard</span><span class="p">.</span><span class="n">SaveAsync</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="w">                    </span><span class="k">await</span><span class="w"> </span><span class="n">shard</span><span class="p">.</span><span class="n">DeleteAsync</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">AddNewShardAsync</span><span class="p">(</span><span class="n">IDatabase</span><span class="w"> </span><span class="n">newShard</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Yeni shard ekleme ve rebalancing işlemi</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="m">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// Simülasyon</span>
+<span class="w">        </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Yeni shard eklendi ve rebalancing tamamlandı&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="1-sharding-stratejileri">1. Sharding Stratejileri<a class="headerlink" href="#1-sharding-stratejileri" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Veri dağılımını analiz et</li>
+<li>Shard boyutunu optimize et</li>
+<li>Shard sayısını belirle</li>
+<li>Shard key seçimini yap</li>
+<li>Shard mapping stratejisini belirle</li>
+</ul>
+<h3 id="2-performans-optimizasyonu">2. Performans Optimizasyonu<a class="headerlink" href="#2-performans-optimizasyonu" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Shard lokasyonunu optimize et</li>
+<li>Çapraz shard sorgularını minimize et</li>
+<li>Shard yükünü dengele</li>
+<li>Önbellekleme stratejisi uygula</li>
+<li>İndeksleme stratejisini belirle</li>
+</ul>
+<h3 id="3-monitoring-ve-logging">3. Monitoring ve Logging<a class="headerlink" href="#3-monitoring-ve-logging" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Shard performansını izle</li>
+<li>Shard boyutunu takip et</li>
+<li>Shard yükünü monitörle</li>
+<li>Hata oranlarını izle</li>
+<li>Otomatik alarmlar kur</li>
+</ul>
+<h2 id="sk-sorulan-sorular">Sık Sorulan Sorular<a class="headerlink" href="#sk-sorulan-sorular" title="Permanent link">&para;</a></h2>
+<h3 id="1-hangi-sharding-stratejisi-ne-zaman-kullanlmaldr">1. Hangi sharding stratejisi ne zaman kullanılmalıdır?<a class="headerlink" href="#1-hangi-sharding-stratejisi-ne-zaman-kullanlmaldr" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hash-Based: Eşit dağılım gerektiğinde</li>
+<li>Range-Based: Sıralı veri erişimi olduğunda</li>
+<li>Directory-Based: Esnek shard mapping gerektiğinde</li>
+<li>Composite: Karmaşık gereksinimler olduğunda</li>
+</ul>
+<h3 id="2-shardingde-veri-tutarllg-nasl-saglanr">2. Sharding'de veri tutarlılığı nasıl sağlanır?<a class="headerlink" href="#2-shardingde-veri-tutarllg-nasl-saglanr" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Transaction yönetimi</li>
+<li>Veri replikasyonu</li>
+<li>Tutarlılık kontrolleri</li>
+<li>Senkronizasyon mekanizmaları</li>
+<li>Hata toleransı</li>
+</ul>
+<h3 id="3-shardingde-karslaslan-zorluklar-nelerdir">3. Sharding'de karşılaşılan zorluklar nelerdir?<a class="headerlink" href="#3-shardingde-karslaslan-zorluklar-nelerdir" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Çapraz shard sorguları</li>
+<li>Veri tutarlılığı</li>
+<li>Shard rebalancing</li>
+<li>Yedekleme ve kurtarma</li>
+<li>Monitoring ve yönetim</li>
+</ul>
+<h2 id="kaynaklar">Kaynaklar<a class="headerlink" href="#kaynaklar" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://docs.microsoft.com/tr-tr/azure/architecture/patterns/sharding">Microsoft Database Sharding</a></li>
+<li><a href="https://www.mongodb.com/basics/sharding">Database Sharding Strategies</a></li>
+<li><a href="https://docs.microsoft.com/tr-tr/azure/architecture/best-practices/data-partitioning">Sharding Best Practices</a></li>
+<li><a href="https://docs.microsoft.com/tr-tr/azure/architecture/patterns/category/data-management">Sharding Patterns</a> </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "search.share", "toc.integrate", "content.tabs.link", "content.code.annotate", "content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
