@@ -415,6 +415,6 @@ Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.
 
 - GitHub: [muratdincc](https://github.com/muratdincc)
 - LinkedIn: [Murat Dinc](https://www.linkedin.com/in/muratdincc)
-- Medium: [Murat Dinc](https://medium.com/@muratdinc)
+- Medium: [Murat Dinc](https://medium.com/@muratdincc)
 
 Bu projeyi takip etmek ve güncellemelerden haberdar olmak için GitHub'da star'layabilir ve watch'layabilirsiniz. Ayrıca LinkedIn ve Medium üzerinden de beni takip edebilirsiniz.
