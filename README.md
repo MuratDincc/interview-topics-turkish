@@ -1,21 +1,33 @@
 # .NET Backend Geliştirici Mülakat Rehberi
 
+[![Deploy](https://github.com/MuratDincc/interview-topics-turkish/actions/workflows/deploy.yml/badge.svg)](https://github.com/MuratDincc/interview-topics-turkish/actions/workflows/deploy.yml)
+[![GitHub stars](https://img.shields.io/github/stars/MuratDincc/interview-topics-turkish?style=social)](https://github.com/MuratDincc/interview-topics-turkish/stargazers)
+[![GitHub license](https://img.shields.io/github/license/MuratDincc/interview-topics-turkish)](https://github.com/MuratDincc/interview-topics-turkish/blob/master/LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/MuratDincc/interview-topics-turkish)](https://github.com/MuratDincc/interview-topics-turkish/commits/master)
+[![GitHub issues](https://img.shields.io/github/issues/MuratDincc/interview-topics-turkish)](https://github.com/MuratDincc/interview-topics-turkish/issues)
+
+.NET backend geliştiricileri için kapsamlı Türkçe mülakat hazırlık rehberi. Tüm içerikler C# kod örnekleri ve detaylı açıklamalar ile desteklenmiştir.
+
 ## 📊 İstatistikler
 
-- **Toplam Seviye**: 3 (Junior, Mid-Level, Senior)
-- **Toplam Konu Başlığı**: 35
-- **Toplam Alt Konu**: 180+
-- **Toplam Mülakat Örneği**: 15
-- **Toplam Soru Sayısı**: 400+
-- **Toplam Kod Örneği**: 800+
+| Metrik | Değer |
+|--------|-------|
+| **Toplam Seviye** | 3 (Junior, Mid-Level, Senior) |
+| **Toplam Konu Başlığı** | 51 |
+| **Toplam Alt Konu** | 257+ |
+| **Toplam Mülakat Örneği** | 7 |
+| **Toplam Soru Sayısı** | 600+ |
+| **Toplam Kod Örneği** | 1200+ |
 
 ## 🎯 Hedef Kitle
 
 Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşabilecekleri tüm konuları kapsamlı bir şekilde ele almaktadır. Üç farklı seviyeye göre düzenlenmiştir:
 
-1. **Junior Developer Mülakat Hazırlığı**
-2. **Mid-Level Developer Mülakat Hazırlığı**
-3. **Senior Developer Mülakat Hazırlığı**
+1. **Junior Developer** - Temel kavramlar, algoritmalar, C# temelleri
+2. **Mid-Level Developer** - İleri konular, mimari desenler, DevOps
+3. **Senior Developer** - System design, cloud, liderlik, ileri mimari
+
+---
 
 ## 📚 İçerik Yapısı
 
@@ -37,6 +49,8 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşa
 - Linked List Algorithms
 - Tree Algorithms
 - Hash Table Algorithms
+- Graph Algorithms
+- Big O Notation
 
 #### 3. C# Temelleri
 - Temel Veri Tipleri
@@ -58,6 +72,8 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşa
 - Value Types vs Reference Types
 - Boxing ve Unboxing
 - Memory Management
+- Records ve Pattern Matching
+- Nullable Reference Types
 
 #### 4. ASP.NET Core Temelleri
 - Middleware
@@ -72,6 +88,7 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşa
 - Migrations
 - Transactions
 - Performance
+- SQL Temelleri
 
 #### 6. API Geliştirme
 - REST API
@@ -99,10 +116,11 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşa
 - Unit Testing Basics
 
 #### 10. Mülakat Örnekleri
+- 5 farklı mülakat senaryosu
 - Her örnek 20 soru içerir
-- Toplam 100+ soru
-- Gerçek mülakat senaryoları
 - Detaylı cevaplar ve açıklamalar
+
+---
 
 ### Mid-Level Developer Mülakat Hazırlığı
 
@@ -249,14 +267,26 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşa
 - Security Testing
 - Chaos Engineering
 
-#### 21. Architecture Patterns
-- Genel Bakış
+#### 21. Feature Flags & A/B Testing
+- Feature Management
+- Gradual Rollout & A/B Testing
 
-#### 22. Mülakat Örnekleri
-- Her örnek 20 soru içerir
-- Toplam 20+ soru
+#### 22. Architecture Patterns
+
+#### 23. Domain-Driven Design
+- Aggregate Root
+- Bounded Context
+- Domain Events
+
+#### 24. CQRS & MediatR
+- CQRS Pattern
+- MediatR Pipeline
+
+#### 25. Mülakat Örnekleri
 - Gerçek mülakat senaryoları
 - Detaylı cevaplar ve açıklamalar
+
+---
 
 ### Senior Developer Mülakat Hazırlığı
 
@@ -289,86 +319,102 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşa
 - Penetration Testing
 
 #### 5. Advanced System Design
-- Genel Bakış
+- CAP Theorem
+- Consensus Algorithms
+- Idempotency
 
 #### 6. Cloud-Native Architecture
-- Genel Bakış
 
 #### 7. Advanced DevOps
-- Genel Bakış
 
 #### 8. Performance Engineering
-- Genel Bakış
 
 #### 9. Data Engineering
-- Genel Bakış
 
 #### 10. Team Leadership
-- Genel Bakış
 
-#### 11. Mülakat Örnekleri
-- Her örnek 20 soru içerir
-- Toplam 20+ soru
+#### 11. Disaster Recovery
+- RPO & RTO
+- Failover Strategies
+
+#### 12. Multi-Tenancy
+- Data Isolation
+- Tenant Resolution
+
+#### 13. Cost Optimization & FinOps
+- Cloud Cost Management
+- FinOps Pratikleri
+
+#### 14. Technical Debt & Migration
+- Strangler Fig Pattern
+- Legacy Modernization
+
+#### 15. Architecture Decision Records
+- ADR Writing
+- Trade-off Analysis
+
+#### 16. Mülakat Örnekleri
 - Gerçek mülakat senaryoları
 - Detaylı cevaplar ve açıklamalar
 
+---
+
 ## 🎓 Mülakat Hazırlık Yol Haritası
 
-1. **Junior Developer Mülakat Hazırlığı**
-   - Temel kavramları öğren ve pratik yap
-   - Algoritma ve veri yapılarını anla ve kodla
-   - C# temellerini kavra ve örnekler üzerinde çalış
-   - ASP.NET Core ile projeler geliştir
-   - Veritabanı işlemlerini öğren ve uygula
-   - API geliştirme pratikleri yap
-   - Güvenlik temellerini anla ve test et
-   - Web development temellerini öğren
-   - Development tools'ları kullanmayı öğren
+### 1. Junior Developer
+- Temel kavramları öğren ve pratik yap
+- Algoritma ve veri yapılarını anla ve kodla (Big O dahil)
+- C# temellerini kavra (Records, Pattern Matching, NRT dahil)
+- ASP.NET Core ile projeler geliştir
+- Veritabanı işlemlerini ve SQL temellerini öğren
+- API geliştirme pratikleri yap
+- Güvenlik temellerini anla
+- Development tools'ları kullanmayı öğren
 
-2. **Mid-Level Developer Mülakat Hazırlığı**
-   - İleri C# konularını öğren ve uygula
-   - Entity Framework advanced konularını öğren
-   - Design pattern'leri projelerde kullan
-   - SOLID prensiplerini içselleştir ve refactor et
-   - Clean Architecture ile projeler geliştir
-   - Microservices mimarisini öğren ve uygula
-   - Performance optimizasyonu tekniklerini öğren
-   - Caching stratejilerini uygula
-   - Logging ve monitoring sistemleri kur
-   - Message queue sistemlerini öğren
-   - Testing stratejilerini geliştir
-   - DevOps pratiklerini öğren
-   - Security konularını derinleştir
-   - Advanced .NET konularını öğren
-   - Monitoring ve observability sistemleri kur
+### 2. Mid-Level Developer
+- İleri C# konularını öğren ve uygula
+- Entity Framework advanced konularını öğren
+- Design pattern'leri ve SOLID prensiplerini içselleştir
+- Clean Architecture ile projeler geliştir
+- Microservices mimarisini öğren
+- DDD, CQRS ve MediatR pattern'lerini uygula
+- Caching, logging ve monitoring sistemleri kur
+- Message queue sistemlerini öğren
+- Feature flags ve A/B testing stratejilerini öğren
+- Testing stratejilerini geliştir
+- DevOps pratiklerini ve security konularını derinleştir
 
-3. **Senior Developer Mülakat Hazırlığı**
-   - System design yeteneklerini geliştir ve pratik yap
-   - Cloud mimarisini öğren ve projeler geliştir
-   - DevOps pratiklerini uygula ve otomatize et
-   - İleri güvenlik konularını öğren ve test et
-   - Advanced system design konularını öğren
-   - Cloud-native architecture prensiplerini uygula
-   - Advanced DevOps pratiklerini öğren
-   - Performance engineering konularını derinleştir
-   - Data engineering konularını öğren
-   - Team leadership yeteneklerini geliştir
+### 3. Senior Developer
+- System design yeteneklerini geliştir (CAP Theorem, Consensus, Idempotency)
+- Cloud mimarisini ve cloud-native yaklaşımları öğren
+- Disaster recovery ve failover stratejilerini planla
+- Multi-tenancy mimarisini tasarla
+- Cost optimization ve FinOps pratiklerini uygula
+- Technical debt yönetimi ve legacy modernization stratejilerini öğren
+- Architecture Decision Records yazma becerisi geliştir
+- Team leadership yeteneklerini geliştir
 
 ## 🚀 Özellikler
 
-- **Kapsamlı İçerik**: 3 seviyede 180+ alt konu
-- **Pratik Örnekler**: Her konuda kod örnekleri
-- **Mülakat Soruları**: Gerçek mülakat senaryoları
+- **Kapsamlı İçerik**: 3 seviyede 257+ alt konu
+- **Türkçe**: Tüm içerik Türkçe olarak hazırlanmıştır
+- **Pratik Örnekler**: Her konuda C# kod örnekleri
+- **Mülakat Soruları**: Gerçek mülakat senaryoları ve detaylı cevaplar
 - **Best Practices**: En iyi uygulamalar ve öneriler
-- **Güncel Teknolojiler**: .NET 8, ASP.NET Core, Entity Framework Core
-- **Cloud Integration**: Azure, AWS, Docker, Kubernetes
+- **Güncel Teknolojiler**: .NET 8, ASP.NET Core, Entity Framework Core, MediatR
+- **Cloud Integration**: Azure, AWS, Docker
 - **Security Focus**: Güvenlik odaklı içerik
 - **Performance**: Performans optimizasyonu teknikleri
+- **Mimari Desenler**: DDD, CQRS, Clean Architecture, Microservices
+
+## 📄 Lisans
+
+Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.
 
 ## 🤝 İletişim ve Takip
 
 - GitHub: [muratdincc](https://github.com/muratdincc)
-- LinkedIn: [Murat Dinç](https://www.linkedin.com/in/muratdinc)
-- Medium: [Murat Dinç](https://medium.com/@muratdinc)
+- LinkedIn: [Murat Dinc](https://www.linkedin.com/in/muratdinc)
+- Medium: [Murat Dinc](https://medium.com/@muratdinc)
 
 Bu projeyi takip etmek ve güncellemelerden haberdar olmak için GitHub'da star'layabilir ve watch'layabilirsiniz. Ayrıca LinkedIn ve Medium üzerinden de beni takip edebilirsiniz.

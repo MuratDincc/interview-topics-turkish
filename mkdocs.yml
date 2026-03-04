@@ -67,6 +67,8 @@ nav:
       - Linked List Algorithms: junior/algorithms/linked-list-algorithms.md
       - Tree Algorithms: junior/algorithms/tree-algorithms.md
       - Hash Table Algorithms: junior/algorithms/hash-table-algorithms.md
+      - Graph Algorithms: junior/algorithms/graph-algorithms.md
+      - Big O Notation: junior/algorithms/big-o-notation.md
     - C# Temelleri:
       - Genel Bakış: junior/csharp-basics/index.md
       - Temel Veri Tipleri: junior/csharp-basics/basic-data-types.md
@@ -88,6 +90,8 @@ nav:
       - Value Types vs Reference Types: junior/csharp-basics/value-reference-types.md
       - Boxing ve Unboxing: junior/csharp-basics/boxing-unboxing.md
       - Memory Management: junior/csharp-basics/memory-management.md
+      - Records ve Pattern Matching: junior/csharp-basics/records-pattern-matching.md
+      - Nullable Reference Types: junior/csharp-basics/nullable-reference-types.md
     - ASP.NET Core Temelleri:
       - Genel Bakış: junior/aspnet-core-basics/index.md
       - Middleware: junior/aspnet-core-basics/middleware.md
@@ -102,6 +106,7 @@ nav:
       - Migrations: junior/database-operations/migrations.md
       - Transactions: junior/database-operations/transactions.md
       - Performance: junior/database-operations/performance.md
+      - SQL Temelleri: junior/database-operations/sql-basics.md
     - API Geliştirme:
       - Genel Bakış: junior/api-development/index.md
       - REST API: junior/api-development/rest-api.md
@@ -275,8 +280,21 @@ nav:
       - Performance Testing: mid-level/testing-strategies/performance-testing.md
       - Security Testing: mid-level/testing-strategies/security-testing.md
       - Chaos Engineering: mid-level/testing-strategies/chaos-engineering.md
+    - Feature Flags & A/B Testing:
+      - Genel Bakış: mid-level/feature-flags/index.md
+      - Feature Management: mid-level/feature-flags/feature-management.md
+      - Gradual Rollout & A/B Testing: mid-level/feature-flags/gradual-rollout.md
     - Architecture Patterns:
       - Genel Bakış: mid-level/architecture-patterns/index.md
+    - Domain-Driven Design:
+      - Genel Bakış: mid-level/ddd/index.md
+      - Aggregate Root: mid-level/ddd/aggregate-root.md
+      - Bounded Context: mid-level/ddd/bounded-context.md
+      - Domain Events: mid-level/ddd/domain-events.md
+    - CQRS & MediatR:
+      - Genel Bakış: mid-level/cqrs-mediatr/index.md
+      - CQRS Pattern: mid-level/cqrs-mediatr/cqrs-pattern.md
+      - MediatR Pipeline: mid-level/cqrs-mediatr/mediatr-pipeline.md
   - Senior Developer:
     - System Design:
       - Genel Bakış: senior/system-design/index.md
@@ -310,7 +328,9 @@ nav:
       - Mülakat Örneği 1: senior/interview-examples/interview-1.md
     - Advanced System Design:
       - Genel Bakış: senior/advanced-system-design/index.md
-
+      - CAP Theorem: senior/advanced-system-design/cap-theorem.md
+      - Consensus Algorithms: senior/advanced-system-design/consensus-algorithms.md
+      - Idempotency: senior/advanced-system-design/idempotency.md
     - Cloud-Native Architecture:
       - Genel Bakış: senior/cloud-native/index.md
 
@@ -325,3 +345,23 @@ nav:
 
     - Team Leadership:
       - Genel Bakış: senior/team-leadership/index.md
+    - Disaster Recovery:
+      - Genel Bakış: senior/disaster-recovery/index.md
+      - RPO & RTO: senior/disaster-recovery/rpo-rto.md
+      - Failover Strategies: senior/disaster-recovery/failover-strategies.md
+    - Multi-Tenancy:
+      - Genel Bakış: senior/multi-tenancy/index.md
+      - Data Isolation: senior/multi-tenancy/data-isolation.md
+      - Tenant Resolution: senior/multi-tenancy/tenant-resolution.md
+    - Cost Optimization & FinOps:
+      - Genel Bakış: senior/cost-optimization/index.md
+      - Cloud Cost Management: senior/cost-optimization/cloud-cost-management.md
+      - FinOps Pratikleri: senior/cost-optimization/finops.md
+    - Technical Debt & Migration:
+      - Genel Bakış: senior/technical-debt/index.md
+      - Strangler Fig Pattern: senior/technical-debt/strangler-fig-pattern.md
+      - Legacy Modernization: senior/technical-debt/legacy-modernization.md
+    - Architecture Decision Records:
+      - Genel Bakış: senior/architecture-decisions/index.md
+      - ADR Writing: senior/architecture-decisions/adr-writing.md
+      - Trade-off Analysis: senior/architecture-decisions/trade-off-analysis.md
