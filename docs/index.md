@@ -66,10 +66,10 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde başarılı 
 - CQRS & MediatR
 
 ### Senior Developer İçeriği
-- 11 ana konu başlığı
-- 11+ alt konu
+- 16 ana konu başlığı
+- 37+ alt konu
 - 1 mülakat örneği
-- 20+ soru
+- 200+ soru
 - System Design
 - Cloud Architecture
 - DevOps Practices
@@ -80,12 +80,17 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde başarılı 
 - Performance Engineering
 - Data Engineering
 - Team Leadership
+- Disaster Recovery
+- Multi-Tenancy
+- Cost Optimization & FinOps
+- Technical Debt & Migration
+- Architecture Decision Records
 
 ## 🚀 Öne Çıkan Özellikler
 
 ### 📚 Kapsamlı İçerik
 - **3 Seviye**: Junior, Mid-Level, Senior geliştiriciler için özel hazırlanmış
-- **180+ Alt Konu**: Her seviyede detaylı konu kapsamı
+- **257+ Alt Konu**: Her seviyede detaylı konu kapsamı
 - **Güncel Teknolojiler**: .NET 8, ASP.NET Core, Entity Framework Core
 
 ### 💻 Pratik Odaklı
