@@ -14,32 +14,32 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde başarılı 
 
 ### Genel İstatistikler
 - **Toplam Seviye**: 3 (Junior, Mid-Level, Senior)
-- **Toplam Konu Başlığı**: 35
-- **Toplam Alt Konu**: 180+
-- **Toplam Mülakat Örneği**: 15
-- **Toplam Soru Sayısı**: 400+
-- **Toplam Kod Örneği**: 800+
+- **Toplam Konu Başlığı**: 51
+- **Toplam Alt Konu**: 257+
+- **Toplam Mülakat Örneği**: 7
+- **Toplam Soru Sayısı**: 600+
+- **Toplam Kod Örneği**: 1200+
 
 ### Junior Developer İçeriği
 - 10 ana konu başlığı
 - 70+ alt konu
 - 5 mülakat örneği
-- 100+ soru
+- 200+ soru
 - Temel seviye algoritma ve veri yapıları
 - ASP.NET Core temelleri
 - Veritabanı işlemleri
 - API geliştirme
 - Güvenlik temelleri
-- C# temelleri (19 alt konu)
+- C# temelleri (21 alt konu)
 - Temel .NET kavramları
 - Web Development Basics
 - Development Tools
 
 ### Mid-Level Developer İçeriği
-- 22 ana konu başlığı
-- 110+ alt konu
+- 25 ana konu başlığı
+- 150+ alt konu
 - 1 mülakat örneği
-- 20+ soru
+- 200+ soru
 - İleri C# konuları
 - Entity Framework (16 alt konu)
 - Caching Stratejileri
@@ -60,7 +60,10 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde başarılı 
 - Advanced .NET Concepts
 - Monitoring & Observability
 - Testing Strategies
+- Feature Flags & A/B Testing
 - Architecture Patterns
+- Domain-Driven Design
+- CQRS & MediatR
 
 ### Senior Developer İçeriği
 - 11 ana konu başlığı
