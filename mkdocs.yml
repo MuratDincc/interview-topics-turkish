@@ -6,6 +6,19 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Karanlık moda geç
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Aydınlık moda geç
   features:
     - navigation.tabs
     - navigation.sections
@@ -19,6 +32,17 @@ theme:
     - content.code.annotate
     - content.code.copy
     - content.action.edit
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/MuratDincc
+      name: GitHub
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/muratdincc
+      name: LinkedIn
+
+copyright: Copyright &copy; 2024 - 2026 Murat Dinc
 
 markdown_extensions:
   - admonition
