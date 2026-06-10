@@ -259,6 +259,18 @@ nav:
     - Mimari:
       - Genel Bakış: mid-level/architecture/index.md
       - Distributed Locking: mid-level/architecture/distributed-locking.md
+    - Dağıtık Sistem Desenleri:
+      - Genel Bakış: mid-level/distributed-patterns/index.md
+      - Outbox Pattern: mid-level/distributed-patterns/outbox-pattern.md
+      - Saga Pattern: mid-level/distributed-patterns/saga-pattern.md
+      - Eventual Consistency: mid-level/distributed-patterns/eventual-consistency.md
+      - Dağıtık Transaction'lar: mid-level/distributed-patterns/distributed-transactions.md
+    - Yüksek Performans C#:
+      - Genel Bakış: mid-level/high-performance-csharp/index.md
+      - Span ve Memory: mid-level/high-performance-csharp/span-and-memory.md
+      - Bellek ve Pooling: mid-level/high-performance-csharp/memory-and-pooling.md
+      - Benchmarking: mid-level/high-performance-csharp/benchmarking.md
+      - Allocation-Free Desenler: mid-level/high-performance-csharp/allocation-free-patterns.md
     - Mülakat Örnekleri:
       - Mülakat Örneği 1: mid-level/interview-examples/interview-1.md
     - API Design & Development:

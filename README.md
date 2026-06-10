@@ -13,11 +13,11 @@
 | Metrik | Değer |
 |--------|-------|
 | **Toplam Seviye** | 3 (Junior, Mid-Level, Senior) |
-| **Toplam Konu Başlığı** | 51 |
-| **Toplam Alt Konu** | 257+ |
+| **Toplam Konu Başlığı** | 53 |
+| **Toplam Alt Konu** | 265+ |
 | **Toplam Mülakat Örneği** | 7 |
-| **Toplam Soru Sayısı** | 600+ |
-| **Toplam Kod Örneği** | 1200+ |
+| **Toplam Soru Sayısı** | 630+ |
+| **Toplam Kod Örneği** | 1250+ |
 
 ## 🎯 Hedef Kitle
 
@@ -282,7 +282,19 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşa
 - CQRS Pattern
 - MediatR Pipeline
 
-#### 25. Mülakat Örnekleri
+#### 25. Dağıtık Sistem Desenleri
+- Outbox Pattern
+- Saga Pattern
+- Eventual Consistency
+- Dağıtık Transaction'lar
+
+#### 26. Yüksek Performans C#
+- Span ve Memory
+- Bellek ve Pooling
+- Benchmarking
+- Allocation-Free Desenler
+
+#### 27. Mülakat Örnekleri
 - Gerçek mülakat senaryoları
 - Detaylı cevaplar ve açıklamalar
 
@@ -380,6 +392,8 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşa
 - DDD, CQRS ve MediatR pattern'lerini uygula
 - Caching, logging ve monitoring sistemleri kur
 - Message queue sistemlerini öğren
+- Dağıtık sistem desenlerini öğren (Outbox, Saga, Eventual Consistency)
+- Yüksek performans C# tekniklerini uygula (Span/Memory, pooling, benchmarking)
 - Feature flags ve A/B testing stratejilerini öğren
 - Testing stratejilerini geliştir
 - DevOps pratiklerini ve security konularını derinleştir
@@ -396,7 +410,7 @@ Bu rehber, .NET backend geliştiricilerinin mülakat süreçlerinde karşılaşa
 
 ## 🚀 Özellikler
 
-- **Kapsamlı İçerik**: 3 seviyede 257+ alt konu
+- **Kapsamlı İçerik**: 3 seviyede 265+ alt konu
 - **Türkçe**: Tüm içerik Türkçe olarak hazırlanmıştır
 - **Pratik Örnekler**: Her konuda C# kod örnekleri
 - **Mülakat Soruları**: Gerçek mülakat senaryoları ve detaylı cevaplar
