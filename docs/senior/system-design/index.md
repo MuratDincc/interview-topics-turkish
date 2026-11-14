@@ -166,4 +166,4 @@ Data partitioning, sharding strategies, ve cross-shard operations.
 - [High Availability](https://docs.microsoft.com/en-us/azure/architecture/guide/design-principles/high-availability)
 - [Load Balancing](https://docs.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview)
 - [Database Sharding](https://docs.microsoft.com/en-us/azure/azure-sql/database/sharding-overview)
-- [System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview) 
+- [System Design Interview](https://www.designgurus.io/course/grokking-the-system-design-interview) 
